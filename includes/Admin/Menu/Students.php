@@ -38,28 +38,32 @@ class Students{
             wp_die( esc_html__( 'Are you cheatting', 'wepme' ) );
         }
 
-        $name        = sanitize_text_field($_POST['name']);
-        $phone       = sanitize_text_field($_POST['phone']);
-        $email       = sanitize_text_field($_POST[ 'email' ]);
-        $batch       = sanitize_text_field($_POST['batch']);
-        $fathersName = sanitize_text_field($_POST['fathersName']);
-        $mothersName = sanitize_text_field($_POST['mothersName']);
-        $village     = sanitize_text_field($_POST['village']);
-        $post        = sanitize_text_field($_POST['post']);
-        $upozila     = sanitize_text_field($_POST['upozila']);
-        $district    = sanitize_text_field($_POST['district']);
+        $user_name     = ! empty($_POST['user_name'] ) ?  sanitize_text_field($_POST['user_name'] ) : '';
+        $user_password = ! empty($_POST['user_password'] ) ?  esc_attr( $_POST['user_password'] ) : '';
+        $name          = ! empty($_POST['name'] ) ?  sanitize_text_field($_POST['name'] ) : '';
+        $phone         = ! empty($_POST['phone'] ) ?  sanitize_text_field($_POST['phone'] ) : '';
+        $email         = ! empty( $_POST['email'] ) ? sanitize_text_field($_POST['email'] ) : '';
+        $batch         = ! empty( $_POST['batch'] ) ? sanitize_text_field($_POST['batch'] ) : '';
+        $fathersName   = ! empty( $_POST[ 'fathers_name' ] ) ? sanitize_text_field($_POST[ 'fathers_name' ] ) : '';
+        $mothersName   = ! empty( $_POST[ 'mothers_name' ] ) ? sanitize_text_field($_POST[ 'mothers_name' ] ) : '';
+        $village       = ! empty( $_POST[ 'village' ] ) ? sanitize_text_field($_POST[ 'village' ] ) : '';
+        $post          = ! empty( $_POST[ 'post' ] ) ? sanitize_text_field($_POST[ 'post' ] ) : '';
+        $upozila       = ! empty( $_POST[ 'upozila' ] ) ? sanitize_text_field($_POST[ 'upozila' ]) : '';
+        $district      = ! empty( $_POST[ 'district' ] ) ? sanitize_text_field($_POST[ 'district' ]) : '';
 
         $insert_id = insert_students_information( [
-            'name'        => $name,
-            'phone'       => $phone,
-            'email'       => $email,
-            'batch'       => $batch,
-            'fathersName' => $fathersName,
-            'mothersName' => $mothersName,
-            'village'     => $village,
-            'post'        => $post,
-            'upozila'     => $upozila,
-            'district'    => $district,
+            'user_name'     => $user_name,
+            'user_password' => $user_password,
+            'name'          => $name,
+            'phone'         => $phone,
+            'email'         => $email,
+            'batch'         => $batch,
+            'fathers_name'  => $fathersName,
+            'mothers_name'  => $mothersName,
+            'village'       => $village,
+            'post'          => $post,
+            'upozila'       => $upozila,
+            'district'      => $district,
         ] ) ;
         if( is_wp_error( $insert_id )){
             wp_die( $insert_id->get_error_message() );

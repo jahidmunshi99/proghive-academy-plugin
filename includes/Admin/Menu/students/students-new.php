@@ -43,18 +43,18 @@
                 </tr>
                 <tr>
                     <th scope="row">
-                        <label for="fathersName"><?php _e( 'Fathers Name', 'wepme' ); ?></label>
+                        <label for="fathers_name"><?php _e( 'Fathers Name', 'wepme' ); ?></label>
                     </th>
                     <td>
-                        <input type="text" name="fathersName" id="fathersName" class="regular-text" value="">
+                        <input type="text" name="fathers_name" id="fathers_name" class="regular-text" value="">
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">
-                        <label for="mothersName"><?php _e( 'Mothers Name', 'wepme' ); ?></label>
+                        <label for="mothers_name"><?php _e( 'Mothers Name', 'wepme' ); ?></label>
                     </th>
                     <td>
-                        <input type="text" name="mothersName" id="mothersName" class="regular-text" value="">
+                        <input type="text" name="mothers_name" id="mothers_name" class="regular-text" value="">
                     </td>
                 </tr>
                 <tr>
@@ -92,6 +92,22 @@
                     </th>
                     <td>
                         <input type="text" name="district" id="district" class="regular-text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label for="user_name"><?php _e( 'User Name', 'wepme' ); ?></label>
+                    </th>
+                    <td>
+                        <input type="text" name="user_name" id="user_name" class="regular-text" value="">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label for="user_password"><?php _e( 'Password', 'wepme' ); ?></label>
+                    </th>
+                    <td>
+                        <input type="text" name="user_password" id="user_password" class="regular-text" value="">
                     </td>
                 </tr>
             </tbody>
