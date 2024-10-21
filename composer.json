@@ -1,0 +1,19 @@
+{
+    "name": "proghive/academy",
+    "description": "This Plugin will be use only for proghive academy paid students",
+    "type": "wordpress-plugin",
+    "license": "GPLv2",
+    "autoload": {
+        "psr-4": {
+            "Proghive\\Academy\\": "includes/"
+        },
+        "files": ["includes/functions.php"]
+    },
+    "authors": [
+        {
+            "name": "Jahid Munshi"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
