@@ -162,6 +162,29 @@ function ph_sutdetns_information_result( $args = [] ){
     return $items;
 }
 
+
+/**
+ * Get All Videos List Information From SQL
+ */
+function ph_videos_information_result( $args = [] ){
+    global $wpdb;
+    $table = $wpdb->prefix.'ph_videos';
+    $defaults = [
+        'number'  => 20,
+        'offset'  => 0,
+        'orderby' => 'id',
+        'order'   => 'ASC',
+    ];
+    $args = wp_parse_args( $args, $defaults );
+
+    $sql = $wpdb->prepare("SELECT * FROM $table", array());
+
+    $item = $wpdb->get_results( $sql );
+
+    return $item;
+}
+
+
 /**
  * Get All Batch Information From SQL
  */
@@ -180,5 +203,27 @@ function ph_batch_information_result( $args = [] ){
 
     $item = $wpdb->get_results( $sql );
 
+    return $item;
+}
+
+/**
+ * Get All Batch info
+ */
+function ph_batch_info( ){
+    global $wpdb;
+    $table = $wpdb->prefix.'ph_batches';
+    $sql = $wpdb->prepare("SELECT batch_number FROM $table" );
+    $item = $wpdb->get_col( $sql );
+    return $item;
+}
+
+/**
+ * Count All Batch
+ */
+function ph_batch_count( ){
+    global $wpdb;
+    $table = $wpdb->prefix.'ph_batches';
+    $sql = $wpdb->prepare("SELECT COUNT(ID) FROM $table" );
+    $item = $wpdb->get_var( $sql );
     return $item;
 }

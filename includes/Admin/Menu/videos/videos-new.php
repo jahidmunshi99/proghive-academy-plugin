@@ -5,6 +5,11 @@
     <hr>
     <br>
 
+    <?php 
+        $batch = ph_batch_info();
+        $count = ph_batch_count( );
+    ?>
+
 
     <form action="" method="post">
         <table class="form-table">
@@ -25,7 +30,15 @@
                     </th>
                     <td>
                         <select name="batch_number" id="batch_number">
-                            <option value=""></option>
+                            <?php
+                                if( ! empty( $count )){
+                                    for ($i = 0; $i <= $count ; $i++) {
+                                        ?>
+                                        <option value="<?php echo $batch[$i]; ?>"><?php echo $batch[$i]; ?></option>
+                                    <?php
+                                    }
+                                }    
+                            ?>
                         </select>
                     </td>
                 </tr>
