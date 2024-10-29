@@ -1,5 +1,5 @@
 <?php
-namespace Proghive\Academy\Admin\Menu\Dashboard;
+namespace Proghive\Academy\Admin\Menu;
 
 /**
  * Dashboard Class

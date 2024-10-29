@@ -12,11 +12,14 @@ class Admin{
         $settings = new Admin\Menu\Settings();
         $batches  = new Admin\Menu\Batches();
         new Admin\Menu( $students, $videos, $settings, $batches );
-        $this->dispath_action( $students );
+        $form_handle = new Admin\Menu\Formhandler( );
+        $this->dispath_action( $form_handle );
     }
 
-    public function dispath_action( $students ){
-        add_action('admin_init', [ $students, 'form_handler' ] );
+    public function dispath_action( $form_handle ){
+        add_action( 'admin_init', [ $form_handle, 'form_handler_students' ] );
+        add_action( 'admin_init', [ $form_handle, 'form_handler_batches' ] );
+        add_action( 'admin_init', [ $form_handle, 'form_handler_videos' ] );
     }
 
 }

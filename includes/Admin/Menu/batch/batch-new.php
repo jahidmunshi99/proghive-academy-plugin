@@ -11,26 +11,38 @@
             <tbody>
                 <tr>
                     <th scope="row">
-                        <label for="name_of_course"><?php _e( 'Name of Course', 'wepme' ); ?></label>
+                        <label for="course_name"><?php _e( 'Name of Course', 'wepme' ); ?></label>
                     </th>
                     <td>
-                        <input type="text" name="name_of_course" id="name_of_course" class="regular-text" value="">
+                        <input type="text" name="course_name" id="name_of_course" class="regular-text" value="">
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">
-                        <label for="batch_name"><?php _e( 'Batch Name', 'wepme' ); ?></label>
+                        <label for="batch_number"><?php _e( 'Batch Number', 'wepme' ); ?></label>
                     </th>
                     <td>
-                        <input type="text" name="batch_name" id="batch_name" class="regular-text" value="">
+                        <input type="text" name="batch_number" id="batch_number" class="regular-text" value="">
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">
-                        <label for="total_seats"><?php _e( 'Total Seats', 'wepme' ); ?></label>
+                        <label for="batch_type"><?php _e( 'Batch type', 'wepme' ); ?></label>
                     </th>
                     <td>
-                        <input type="email" name="total_seats" id="total_seats" class="regular-text" value="">
+                        <select name="batch_type" id="batch_type">
+                            <option value="">-Select-</option>
+                            <option value="online">Online</option>
+                            <option value="offline">Offline</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label for="total_seat"><?php _e( 'Total Seats', 'wepme' ); ?></label>
+                    </th>
+                    <td>
+                        <input type="number" name="total_seat" id="total_seat" class="regular-text" value="">
                     </td>
                 </tr>
                 <tr>
