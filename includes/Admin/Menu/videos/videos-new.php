@@ -7,10 +7,9 @@
 
     <?php 
         $batch = ph_batch_info();
-        $count = ph_batch_count( );
+        $count = ph_batch_count();
         $course = ph_course_info();
-        $duplicate = [];
-    ?>
+     ?>
 
     <form action="" method="post">
         <table class="form-table">

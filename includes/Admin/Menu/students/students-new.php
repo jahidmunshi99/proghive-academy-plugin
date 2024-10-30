@@ -4,7 +4,10 @@
 
     <hr>
     <br>
-    
+    <?php
+        $batch = ph_batch_info();
+        $count = ph_batch_count();
+    ?>
 
 
     <form action="" method="post">
@@ -39,7 +42,16 @@
                         <label for="batch"><?php _e( 'Batch', 'wepme' ); ?></label>
                     </th>
                     <td>
-                        <input type="text" name="batch" id="batch" class="regular-text" value="">
+                        <select name="batch" id="batch">
+                            <option value=""> - Select One -</option>
+                            <?php
+                                if( ! empty( $batch ) ){
+                                    for( $i=0; $i < $count; $i++){?>
+                                        <option value="<?php echo $batch[$i] ?>"><?php echo $batch[$i] ?></option>
+                                    <?php }
+                                }
+                            ?>
+                        </select>
                     </td>
                 </tr>
                 <tr>

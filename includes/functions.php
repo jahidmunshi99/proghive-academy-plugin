@@ -239,3 +239,34 @@ function ph_course_info( ){
     $item = $wpdb->get_col( $sql );
     return $item;
 }
+
+/**
+ * Video Count
+ */
+function ph_video_count( ){
+    global $wpdb;
+    $table = $wpdb->prefix.'ph_videos';
+    $sql = $wpdb->prepare("SELECT COUNT(ID) FROM $table" );
+    $item = $wpdb->get_var( $sql );
+    return $item;
+}
+
+/**
+ * Get Video Title
+ */
+function ph_class_video_title(){
+    global $wpdb;
+    $table = $wpdb->prefix.'ph_videos';
+    $item = $wpdb->get_col("SELECT video_title FROM $table");
+    return $item;
+}
+
+/**
+ * Get Video Url Link
+ */
+function ph_class_video_url(){
+    global $wpdb;
+    $table = $wpdb->prefix.'ph_videos';
+    $item = $wpdb->get_col("SELECT video_url FROM $table");
+    return $item;
+}

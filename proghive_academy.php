@@ -66,7 +66,12 @@
      * Initalize After Plguin Loaded
      */
     public function init_plugin(){
-        new Proghive\Academy\Admin();
+        if( is_admin() ){
+            new Proghive\Academy\Admin();
+        }else{
+            new \Proghive\Academy\Frontend();
+        }
+        new \Proghive\Academy\Assets;
     }
 
     /**

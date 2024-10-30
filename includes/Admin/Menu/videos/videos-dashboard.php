@@ -11,12 +11,8 @@
     <?php
     }
         $video_info = ph_videos_information_result();
-        echo '<h4>test</h4>';
         $batch = ph_batch_info();
         $count = ph_batch_count( );
-        print_r( $batch );
-
-        echo $count;
     ?>
     <form action="" method="post">
         <table class="form-table">
