@@ -227,3 +227,15 @@ function ph_batch_count( ){
     $item = $wpdb->get_var( $sql );
     return $item;
 }
+
+
+/**
+ * Get All Batch info
+ */
+function ph_course_info( ){
+    global $wpdb;
+    $table = $wpdb->prefix.'ph_batches';
+    $sql = $wpdb->prepare("SELECT course_name FROM $table" );
+    $item = $wpdb->get_col( $sql );
+    return $item;
+}

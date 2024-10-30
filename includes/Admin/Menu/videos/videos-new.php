@@ -8,8 +8,9 @@
     <?php 
         $batch = ph_batch_info();
         $count = ph_batch_count( );
+        $course = ph_course_info();
+        $duplicate = [];
     ?>
-
 
     <form action="" method="post">
         <table class="form-table">
@@ -19,9 +20,29 @@
                         <label for="course_name"><?php _e( 'Name of Course', 'wepme' ); ?></label>
                     </th>
                     <td>
+
+
                         <select name="course_name" id="course_name">
-                            <option value=""></option>
+                            <option value="-Select-">-Select-</option>
+                            <?php
+                                // Array to track duplicates
+                                $duplicate = [];
+
+                                // Check if the course array is not empty
+                                if( !empty($course)) {
+                                    for($i = 0; $i < count($course); $i++) {
+                                        // Only add to the dropdown if the course name is not in the duplicate array
+                                        if(!in_array($course[$i], $duplicate)) {
+                                            $duplicate[] = $course[$i]; // Add the course to the duplicate array
+                                            ?>
+                                            <option value="<?php echo $course[$i]; ?>"><?php echo $course[$i]; ?></option>
+                                        <?php
+                                        }
+                                    }
+                                }
+                            ?>
                         </select>
+
                     </td>
                 </tr>
                 <tr>
@@ -31,13 +52,15 @@
                     <td>
                         <select name="batch_number" id="batch_number">
                             <?php
-                                if( ! empty( $count )){
-                                    for ($i = 0; $i <= $count ; $i++) {
+                                if( ! empty( $count )){?>
+                                    <option value="-Select-">-Select-</option>
+                                <?php
+                                    for ($i = 0; $i < $count ; $i++) {
                                         ?>
                                         <option value="<?php echo $batch[$i]; ?>"><?php echo $batch[$i]; ?></option>
                                     <?php
                                     }
-                                }    
+                                } 
                             ?>
                         </select>
                     </td>
