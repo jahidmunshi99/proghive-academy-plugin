@@ -26,7 +26,7 @@
                     <label for=""><?php echo esc_html__('Batch', 'proghive') ?></label>
                 </th>
                 <th class="manage-column column-title column-primary sortable desc" scope="col">
-                    <label for=""><?php echo esc_html__('Video Tittle', 'proghive') ?></label>
+                    <label for=""><?php echo esc_html__('Video Title', 'proghive') ?></label>
                 </th>
                 <th class="manage-column column-title column-primary sortable desc" scope="col">
                     <label for=""><?php echo esc_html__('Course Name', 'proghive') ?></label>

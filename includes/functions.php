@@ -209,11 +209,11 @@ function ph_batch_information_result( $args = [] ){
 /**
  * Get All Batch info
  */
-function ph_batch_name( ){
+function ph_get_video_id_batch_info( ){
     global $wpdb;
-    $table = $wpdb->prefix.'ph_batches';
-    $sql = $wpdb->prepare("SELECT batch_name FROM $table" );
-    $item = $wpdb->get_col( $sql );
+    $table = $wpdb->prefix.'ph_videos';
+    $sql = "SELECT ID, course_name, batch_name FROM $table";
+    $item = $wpdb->get_results( $sql );
     return $item;
 }
 

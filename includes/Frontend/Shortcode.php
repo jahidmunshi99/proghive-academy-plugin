@@ -12,15 +12,18 @@ class Shortcode{
     }
 
     public function playlist_shortcode( ){
-        $batch_name = ph_batch_name( );
-        foreach( $batch_name as $name ){
-            echo $name;
+        /**
+         * Fatch Data
+         * @var mixed
+         */
+        $items = ph_get_video_id_batch_info( );
+        foreach( $items as $item ){
+            $total_id = $item->ID;
+            $total_batch = $item->batch_name;
+            $total_course = $item->course_name; 
         }
-        // echo $batch_name;
-        // $video_batch_name = ph_video_batch_name( );
-        // if( $batch_name === $video_batch_name ){
-        //     printf( $video_batch_name );
-        // }
+
+
 
         ob_start();
         /**
