@@ -59,7 +59,7 @@
                     <td class="title column-title has-row-actions column-primary page-title"><?php echo esc_html( $data->course_name ) ?></td>      
                     <!-- End Name Column -->    
                     <!-- Phone Column Start -->  
-                    <td class="title column-title has-row-actions column-primary page-title"><?php echo esc_html( $data->batch_number ) ?></td>      
+                    <td class="title column-title has-row-actions column-primary page-title"><?php echo esc_html( $data->batch_name ) ?></td>      
                     <!-- End Phone Column -->    
                     <!-- Email Column Start -->  
                     <td class="title column-title has-row-actions column-primary page-title"><?php echo esc_html( $data->batch_type ) ?></td>      

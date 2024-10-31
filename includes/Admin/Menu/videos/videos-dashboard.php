@@ -11,7 +11,7 @@
     <?php
     }
         $video_info = ph_videos_information_result();
-        $batch = ph_batch_info();
+        $batch = ph_batch_name();
         $count = ph_batch_count( );
     ?>
     <form action="" method="post">
@@ -51,7 +51,7 @@
                     <td class="title column-title has-row-actions column-primary page-title"><input type="checkbox"></td>
                     <!-- End Sl Column --> 
                     <!-- Name Column Start -->  
-                    <td class="title column-title has-row-actions column-primary page-title"><?php echo esc_html( $data->batch_number ) ?></td>      
+                    <td class="title column-title has-row-actions column-primary page-title"><?php echo esc_html( $data->batch_name ) ?></td>      
                     <!-- End Name Column -->    
                     <!-- Phone Column Start -->  
                     <td class="title column-title has-row-actions column-primary page-title"><?php echo esc_html( $data->video_title ) ?></td>      

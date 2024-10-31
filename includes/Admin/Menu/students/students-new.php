@@ -5,7 +5,7 @@
     <hr>
     <br>
     <?php
-        $batch = ph_batch_info();
+        $batch = ph_batch_number();
         $count = ph_batch_count();
     ?>
 

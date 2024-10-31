@@ -61,7 +61,7 @@ function insert_ph_video_informaton( $args = [] ){
     $defaults = [
         'id'            => '',
         'course_name'   => '',
-        'batch_number'  => '',
+        'batch_name'    => '',
         'video_title'   => '',
         'video_url'     => '',
         'video_details' => '',
@@ -103,7 +103,7 @@ function insert_ph_batch_informaton( $args = [] ){
     $defaults = [
         'id'                       => '',
         'course_name'              => '',
-        'batch_number'             => '',
+        'batch_name'               => '',
         'batch_type'               => '',
         'total_seat'               => '',
         'end_of_registration_date' => get_date_template(  ),
@@ -209,10 +209,10 @@ function ph_batch_information_result( $args = [] ){
 /**
  * Get All Batch info
  */
-function ph_batch_info( ){
+function ph_batch_name( ){
     global $wpdb;
     $table = $wpdb->prefix.'ph_batches';
-    $sql = $wpdb->prepare("SELECT batch_number FROM $table" );
+    $sql = $wpdb->prepare("SELECT batch_name FROM $table" );
     $item = $wpdb->get_col( $sql );
     return $item;
 }
@@ -241,13 +241,24 @@ function ph_course_info( ){
 }
 
 /**
- * Video Count
+ * Get Total Videos Count
  */
 function ph_video_count( ){
     global $wpdb;
     $table = $wpdb->prefix.'ph_videos';
     $sql = $wpdb->prepare("SELECT COUNT(ID) FROM $table" );
     $item = $wpdb->get_var( $sql );
+    return $item;
+}
+
+/**
+ * Get All Batchs From Videos
+ */
+function ph_video_batch_name( ){
+    global $wpdb;
+    $table = $wpdb->prefix.'ph_videos';
+    $sql = $wpdb->prepare("SELECT batch_name FROM $table" );
+    $item = $wpdb->get_col( $sql );
     return $item;
 }
 
@@ -268,5 +279,15 @@ function ph_class_video_url(){
     global $wpdb;
     $table = $wpdb->prefix.'ph_videos';
     $item = $wpdb->get_col("SELECT video_url FROM $table");
+    return $item;
+}
+
+/**
+ * Get Video Details
+ */
+function ph_class_video_details(){
+    global $wpdb;
+    $table = $wpdb->prefix.'ph_videos';
+    $item = $wpdb->get_col("SELECT video_details FROM $table");
     return $item;
 }

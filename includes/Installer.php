@@ -66,7 +66,7 @@ class Installer{
         $schema = "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}ph_videos` (
           `id` int(11) NOT NULL AUTO_INCREMENT,
           `course_name` varchar(100) NOT NULL DEFAULT '',
-          `batch_number` varchar(50) DEFAULT NULL,
+          `batch_name` varchar(50) DEFAULT NULL,
           `video_title` varchar(100) DEFAULT NULL,
           `video_url` varchar(100) DEFAULT NULL,
           `video_details` varchar(500) DEFAULT NULL,
@@ -94,7 +94,7 @@ class Installer{
         $sehema = "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}ph_batches` (
                 `id` int(11) NOT NULL AUTO_INCREMENT,
                 `course_name` varchar(100) DEFAULT NULL,
-                `batch_number` varchar(255) DEFAULT NULL,
+                `batch_name` varchar(255) DEFAULT NULL,
                 `batch_type` varchar(20) DEFAULT NULL,
                 `total_seat` bigint(20) unsigned NOT NULL,
                 `end_of_registration_date` datetime DEFAULT NULL,

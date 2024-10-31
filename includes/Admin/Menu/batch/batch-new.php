@@ -19,10 +19,10 @@
                 </tr>
                 <tr>
                     <th scope="row">
-                        <label for="batch_number"><?php _e( 'Batch Number', 'wepme' ); ?></label>
+                        <label for="batch_name"><?php _e( 'Batch Number', 'wepme' ); ?></label>
                     </th>
                     <td>
-                        <input type="text" name="batch_number" id="batch_number" class="regular-text" value="">
+                        <input type="text" name="batch_name" id="batch_name" class="regular-text" value="">
                     </td>
                 </tr>
                 <tr>

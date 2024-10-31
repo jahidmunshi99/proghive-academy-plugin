@@ -12,6 +12,15 @@ class Shortcode{
     }
 
     public function playlist_shortcode( ){
+        $batch_name = ph_batch_name( );
+        foreach( $batch_name as $name ){
+            echo $name;
+        }
+        // echo $batch_name;
+        // $video_batch_name = ph_video_batch_name( );
+        // if( $batch_name === $video_batch_name ){
+        //     printf( $video_batch_name );
+        // }
 
         ob_start();
         /**
@@ -23,6 +32,7 @@ class Shortcode{
         $video_count = ph_video_count( );
         $video_title = ph_class_video_title();
         $video_link = ph_class_video_url();
+        // $video_detalis = ph_class_video_details();
         
         ?>
         <div id="video-playlist">
@@ -30,14 +40,17 @@ class Shortcode{
                 <!-- Playlist Section -->
                 <div class="playlist">
                     <div class="playlist-content">
-                        <h2>Video Playlist<sup>4th Batch</sup></h2>
+                        <h3 class="playlist-title">Video Playlist</h3>
+                        <p class="batch-number">4th Batch</p>
                     </div>
                     <div class="video-items">
                         <?php
                         if( ! empty ( $video_count ) ){
                             for( $i = 0; $i < $video_count; $i++ ){
                                 $title = esc_html( $video_title[$i] );
-                                $url = esc_url( $video_link[$i] )?>
+                                $url = esc_url( $video_link[$i] );
+                                ?>
+                                
                                 <div class="video-item" onclick="playVideo('<?php echo $url ?>')"><?php echo $title ?></div>
                             <?php }
                         }
@@ -50,8 +63,6 @@ class Shortcode{
                     <iframe id="videoPlayer" src="" title="<?php echo $title ?>" frameborder="0" allow=" autoplay;"  allowfullscreen></iframe>
                     <!-- </video> -->
                     <div class="video-details">
-                        <p>Lorem i</p>
-                        <p>Lorem emque?</p>
                     </div>
                 </div>
                 <!-- End Player Section -->

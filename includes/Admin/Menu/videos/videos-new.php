@@ -6,7 +6,7 @@
     <br>
 
     <?php 
-        $batch = ph_batch_info();
+        $batch = ph_batch_name();
         $count = ph_batch_count();
         $course = ph_course_info();
      ?>
@@ -46,10 +46,10 @@
                 </tr>
                 <tr>
                     <th scope="row">
-                        <label for="batch_number"><?php _e( 'Number of Batch', 'wepme' ); ?></label>
+                        <label for="batch_name"><?php _e( 'Number of Batch', 'wepme' ); ?></label>
                     </th>
                     <td>
-                        <select name="batch_number" id="batch_number">
+                        <select name="batch_name" id="batch_name">
                             <?php
                                 if( ! empty( $count )){?>
                                     <option value="-Select-">-Select-</option>

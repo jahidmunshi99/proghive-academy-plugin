@@ -90,7 +90,7 @@ class Formhandler{
          * Sanitize text filed
          */
         $course_name = ! empty( $_POST['course_name'] ) ? sanitize_text_field( $_POST['course_name'] ) : '';
-        $batch_number = ! empty( $_POST['batch_number'] ) ? sanitize_text_field( $_POST['batch_number'] ) : '';
+        $batch_name = ! empty( $_POST['batch_name'] ) ? sanitize_text_field( $_POST['batch_name'] ) : '';
         $video_title = ! empty( $_POST['video_title'] ) ? sanitize_text_field( $_POST['video_title'] ) : '';
         $video_url = ! empty( $_POST['video_url']) ? esc_attr( $_POST['video_url'] ) : '';
         $video_details = ! empty( $_POST['video_details'] ) ? sanitize_textarea_field( $_POST['video_details'] ) : '';
@@ -98,7 +98,7 @@ class Formhandler{
 
         $videos_data = [
             'course_name'   => $course_name,
-            'batch_number'  => $batch_number,
+            'batch_name'    => $batch_name,
             'video_title'   => $video_title,
             'video_url'     => $video_url,
             'video_details' => $video_details,
@@ -144,14 +144,14 @@ class Formhandler{
          * Sanitize Batch Information
          */
         $course_name      = ! empty( $_POST[ 'course_name' ]) ? sanitize_text_field( $_POST[ 'course_name' ] ) : '';
-        $batch_name       = ! empty( $_POST[ 'batch_number' ]) ? sanitize_text_field( $_POST[ 'batch_number' ] ) : '';
+        $batch_name       = ! empty( $_POST[ 'batch_name' ]) ? sanitize_text_field( $_POST[ 'batch_name' ] ) : '';
         $batch_type       = ! empty( $_POST[ 'batch_type' ]) ? esc_attr( $_POST[ 'batch_type' ] ) : '';
         $total_seats      = ! empty( $_POST[ 'total_seat' ]) ? sanitize_text_field( $_POST[ 'total_seat' ] ) : '';
         $end_registration = ! empty( $_POST[ 'end_of_registration_date' ]) ? esc_attr( $_POST[ 'end_of_registration_date' ] ) : '';
 
         $insert_batch = [
                 'course_name'              => $course_name,
-                'batch_number'             => $batch_name,
+                'batch_name'               => $batch_name,
                 'batch_type'               => $batch_type,
                 'total_seat'               => $total_seats,
                 'end_of_registration_date' => $end_registration,
