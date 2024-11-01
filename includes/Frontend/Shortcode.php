@@ -17,11 +17,57 @@ class Shortcode{
          * @var mixed
          */
         $items = ph_get_video_id_batch_info( );
-        foreach( $items as $item ){
-            $total_id = $item->ID;
-            $total_batch = $item->batch_name;
-            $total_course = $item->course_name; 
+        // $batch_name = 'PHAOB-1';
+        // foreach( $items as $item ){
+        //     $batch_name = $item->batch_name;
+        //     $total_id = $item->ID;
+        //     $total_batch = $item->batch_name;
+        //     $total_course = $item->course_name; 
+        //     $batch_count = $batch_name;
+        // }
+        // echo "<p>this is from batch count</p>" . $batch_count;
+   
+
+        // Define the brand you want to display cars for
+        global $wpdb;
+        $batch_name = 'PHAOB-1'; // Change this to the brand you want to display
+
+        // Query to select all cars of the specified brand
+        $cars = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT * FROM {$wpdb->prefix}ph_videos WHERE batch_name = %s",
+                $batch_name
+            )
+        );
+
+        // Display the results
+        if ( ! empty( $cars ) ) {
+            echo "<h2>Cars for brand: $batch_name</h2>";
+            echo "<ul>";
+            foreach ( $cars as $car ) {
+                echo "<li>ID: {$car->id}, Course Name: {$car->course_name}, Video: {$car->video_url}</li>";
+            }
+            echo "</ul>";
+        } else {
+            echo "<p>No cars found for this brand.</p>";
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
