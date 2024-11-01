@@ -55,7 +55,7 @@ function insert_students_information( $args = [] ){
 /**
  * This Function will insert all new Video to Database
  */
-function insert_ph_video_informaton( $args = [] ){
+function insert_video_informaton( $args = [] ){
     global $wpdb;
     $table = $wpdb->prefix.'ph_videos';
     $defaults = [
@@ -96,7 +96,7 @@ function insert_ph_video_informaton( $args = [] ){
 /**
  * This Function will insert all new students informtion to Database
  */
-function insert_ph_batch_informaton( $args = [] ){
+function insert_batch_informaton( $args = [] ){
     global $wpdb;
     $table = $wpdb->prefix.'ph_batches';
 
@@ -134,10 +134,15 @@ function insert_ph_batch_informaton( $args = [] ){
     return $wpdb->$insert_item;
 }
 
+
 /**
- * Get All Students Information form MySql Database
+ * ======================================== Fetch Data From MYSQL Database =====================================
  */
-function ph_sutdetns_information_result( $args = [] ){
+
+/**
+ * Get All Students Information From MySQL "ph_students" Table
+ */
+function get_sutdents_results( $args = [] ){
     global $wpdb;
     $table_name = $wpdb->prefix.'ph_students';
     $defaults = [
@@ -164,11 +169,33 @@ function ph_sutdetns_information_result( $args = [] ){
 
 
 /**
- * Get All Videos List Information From SQL
+ * Get All Videos Information From MySQL "ph_videos" Table
  */
-function ph_videos_information_result( $args = [] ){
+function get_videos_result( $args = [] ){
     global $wpdb;
     $table = $wpdb->prefix.'ph_videos';
+    $defaults = [
+        'number'  => 20,
+        'offset'  => 0,
+        'orderby' => 'id',
+        'order'   => 'ASC',
+    ];
+    $args = wp_parse_args( $args, $defaults );
+
+    $sql = $wpdb->prepare("SELECT * FROM $table");
+
+    $item = $wpdb->get_results( $sql );
+
+    return $item;
+}
+
+
+/**
+ * Get All Batch Information From MySQL "ph_batches" Table
+ */
+function get_batch_results( $args = [] ){
+    global $wpdb;
+    $table = $wpdb->prefix.'ph_batches';
     $defaults = [
         'number'  => 20,
         'offset'  => 0,
@@ -184,123 +211,28 @@ function ph_videos_information_result( $args = [] ){
     return $item;
 }
 
-
 /**
- * Get All Batch Information From SQL
+ * Get All Videos Information From MySQL "ph_videos" Table
  */
-function ph_batch_information_result( $args = [] ){
-    global $wpdb;
-    $table = $wpdb->prefix.'ph_batches';
-    $defaults = [
-        'number'  => 20,
-        'offset'  => 0,
-        'orderby' => 'id',
-        'order'   => 'ASC',
-    ];
-    $args = wp_parse_args( $args, $defaults );
-
-    $sql = $wpdb->prepare("SELECT * FROM $table", array());
-
-    $item = $wpdb->get_results( $sql );
-
-    return $item;
-}
-
-/**
- * Get All Batch info
- */
-function ph_get_video_id_batch_info( ){
+function get_video_results( ){
     global $wpdb;
     $table = $wpdb->prefix.'ph_videos';
-    $sql = "SELECT ID, course_name, batch_name FROM $table";
+    $sql = $wpdb->prepare("SELECT * FROM $table");
     $item = $wpdb->get_results( $sql );
     return $item;
 }
 
-/**
- * Count All Batch
- */
-function ph_batch_count( ){
-    global $wpdb;
-    $table = $wpdb->prefix.'ph_batches';
-    $sql = $wpdb->prepare("SELECT COUNT(ID) FROM $table" );
-    $item = $wpdb->get_var( $sql );
-    return $item;
-}
 
 
-/**
- * Get All Batch info
- */
-function ph_course_info( ){
-    global $wpdb;
-    $table = $wpdb->prefix.'ph_batches';
-    $sql = $wpdb->prepare("SELECT course_name FROM $table" );
-    $item = $wpdb->get_col( $sql );
-    return $item;
-}
-
-/**
- * Get All Batch Name
- */
-
-function ph_batch_name( ){
-    global $wpdb;
-    $table = $wpdb->prefix.'ph_batches';
-    $sql = $wpdb->prepare("SELECT batch_name FROM $table" );
-    $item = $wpdb->get_col( $sql );
-    return $item;
-}
 
 
-/**
- * Get Total Videos Count
- */
-function ph_video_count( ){
-    global $wpdb;
-    $table = $wpdb->prefix.'ph_videos';
-    $sql = $wpdb->prepare("SELECT COUNT(ID) FROM $table" );
-    $item = $wpdb->get_var( $sql );
-    return $item;
-}
 
-/**
- * Get All Batchs From Videos
- */
-function ph_video_batch_name( ){
-    global $wpdb;
-    $table = $wpdb->prefix.'ph_videos';
-    $sql = $wpdb->prepare("SELECT batch_name FROM $table" );
-    $item = $wpdb->get_col( $sql );
-    return $item;
-}
 
-/**
- * Get Video Title
- */
-function ph_class_video_title(){
-    global $wpdb;
-    $table = $wpdb->prefix.'ph_videos';
-    $item = $wpdb->get_col("SELECT video_title FROM $table");
-    return $item;
-}
 
-/**
- * Get Video Url Link
- */
-function ph_class_video_url(){
-    global $wpdb;
-    $table = $wpdb->prefix.'ph_videos';
-    $item = $wpdb->get_col("SELECT video_url FROM $table");
-    return $item;
-}
 
-/**
- * Get Video Details
- */
-function ph_class_video_details(){
-    global $wpdb;
-    $table = $wpdb->prefix.'ph_videos';
-    $item = $wpdb->get_col("SELECT video_details FROM $table");
-    return $item;
-}
+
+
+
+
+
+

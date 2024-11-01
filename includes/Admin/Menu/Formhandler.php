@@ -104,7 +104,7 @@ class Formhandler{
             'video_details' => $video_details,
         ];
         
-        $insert_video = insert_ph_video_informaton( $videos_data );
+        $insert_video = insert_video_informaton( $videos_data );
         if ( is_wp_error( $insert_video )) {
             wp_die( $insert_video->get_error_message());
         }
@@ -156,7 +156,7 @@ class Formhandler{
                 'total_seat'               => $total_seats,
                 'end_of_registration_date' => $end_registration,
             ];
-        $batch_id = insert_ph_batch_informaton( $insert_batch );
+        $batch_id = insert_batch_informaton( $insert_batch );
         if( is_wp_error( $batch_id )){
             wp_die( $batch_id->get_error_message() );
         }
