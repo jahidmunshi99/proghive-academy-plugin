@@ -51,15 +51,16 @@
                     <td>
                         <select name="batch_name" id="batch_name">
                             <?php
-                                if( ! empty( $count )){?>
-                                    <option value="-Select-">-Select-</option>
-                                <?php
+                                if( ! empty( $count )){
                                     for ($i = 0; $i < $count ; $i++) {
                                         ?>
                                         <option value="<?php echo $batch[$i]; ?>"><?php echo $batch[$i]; ?></option>
                                     <?php
                                     }
-                                } 
+                                }else{?>
+                                    <option value="-Select-">-Select-</option>
+                                <?php
+                                }
                             ?>
                         </select>
                     </td>

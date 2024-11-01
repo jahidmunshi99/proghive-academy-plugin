@@ -241,6 +241,19 @@ function ph_course_info( ){
 }
 
 /**
+ * Get All Batch Name
+ */
+
+function ph_batch_name( ){
+    global $wpdb;
+    $table = $wpdb->prefix.'ph_batches';
+    $sql = $wpdb->prepare("SELECT batch_name FROM $table" );
+    $item = $wpdb->get_col( $sql );
+    return $item;
+}
+
+
+/**
  * Get Total Videos Count
  */
 function ph_video_count( ){
