@@ -10,7 +10,7 @@
         </div>
     <?php
     }
-        $sutdetns_info = ph_sutdetns_information_result();
+        $sutdetns_info = get_sutdents_results();
     ?>
     <form action="" method="post">
         <table class="form-table">

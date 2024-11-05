@@ -9,7 +9,7 @@
         </div>
     <?php
     }
-        $batch_info = ph_batch_information_result();
+        $batch_info = get_batch_results();
     ?>
     <form action="" method="post">
         <table class="form-table">

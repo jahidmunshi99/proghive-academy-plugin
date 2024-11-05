@@ -31,33 +31,30 @@ class Formhandler{
         /**
          * Sanitize Students Information
          */
-
+        $course_name   = ! empty( $_POST[ 'course_name' ] ) ? sanitize_text_field($_POST[ 'course_name' ] ) : '';
+        $batch         = ! empty( $_POST[ 'batch' ] ) ? sanitize_text_field($_POST[ 'batch' ] ) : '';
         $name          = ! empty($_POST[ 'name' ] ) ?  sanitize_text_field($_POST[ 'name' ] ) : '';
         $phone         = ! empty($_POST[ 'phone' ] ) ?  sanitize_text_field($_POST[ 'phone' ] ) : '';
         $email         = ! empty( $_POST[ 'email' ] ) ? sanitize_text_field($_POST[ 'email' ] ) : '';
-        $batch         = ! empty( $_POST[ 'batch' ] ) ? sanitize_text_field($_POST[ 'batch' ] ) : '';
-        $fathersName   = ! empty( $_POST[ 'fathers_name' ] ) ? sanitize_text_field($_POST[ 'fathers_name' ] ) : '';
-        $mothersName   = ! empty( $_POST[ 'mothers_name' ] ) ? sanitize_text_field($_POST[ 'mothers_name' ] ) : '';
-        $village       = ! empty( $_POST[ 'village' ] ) ? sanitize_text_field($_POST[ 'village' ] ) : '';
-        $post          = ! empty( $_POST[ 'post' ] ) ? sanitize_text_field($_POST[ 'post' ] ) : '';
-        $upozila       = ! empty( $_POST[ 'upozila' ] ) ? sanitize_text_field($_POST[ 'upozila' ]) : '';
-        $district      = ! empty( $_POST[ 'district' ] ) ? sanitize_text_field($_POST[ 'district' ]) : '';
+        $nid_number    = ! empty( $_POST[ 'nid_number' ] ) ? sanitize_text_field($_POST[ 'nid_number' ] ) : '';
+        $facebook_link = ! empty( $_POST[ 'facebook_link' ] ) ? esc_attr( $_POST[ 'facebook_link' ] ) : '';
+        $address       = ! empty( $_POST[ 'address' ] ) ? sanitize_textarea_field( $_POST[ 'address' ] ) : '';
         $user_name     = ! empty($_POST[ 'user_name' ] ) ?  esc_attr($_POST[ 'user_name' ] ) : '';
         $user_password = ! empty($_POST[ 'user_password' ] ) ?  esc_attr( $_POST[ 'user_password' ] ) : '';
 
         $studets_info = insert_students_information( [
+            'course_name'   => $course_name,
             'user_name'     => $user_name,
             'user_password' => $user_password,
             'name'          => $name,
             'phone'         => $phone,
             'email'         => $email,
             'batch'         => $batch,
-            'fathers_name'  => $fathersName,
-            'mothers_name'  => $mothersName,
-            'village'       => $village,
-            'post'          => $post,
-            'upozila'       => $upozila,
-            'district'      => $district,
+            'nid_number'    => $nid_number,
+            'facebook_link' => $facebook_link,
+            'address'       => $address,
+            'user_name'     => $user_name,
+            'user_password' => $user_password,
         ] ) ;
 
             if( is_wp_error( $studets_info )){

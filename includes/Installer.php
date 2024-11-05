@@ -10,6 +10,7 @@ class Installer{
         $this->create_student_table();
         $this->create_video_link_table();
         $this->create_batches();
+        $this->add_login_page();
     }
 
     /**
@@ -31,16 +32,14 @@ class Installer{
         $charset_collate = $wpdb->get_charset_collate();
         $schema = "CREATE TABLE IF NOT EXISTS `{$wpdb->prefix}ph_students` (
             `id` int(10) NOT NULL AUTO_INCREMENT,
+            `course_name` varchar(50) DEFAULT NULL,
+            `batch` varchar(20) DEFAULT NULL,
             `name` varchar(50) DEFAULT NULL,
             `phone` varchar(11) DEFAULT NULL,
             `email` varchar(50) DEFAULT NULL,
-            `batch` varchar(20) DEFAULT NULL,
-            `fathers_name` varchar(50) NOT NULL,
-            `mothers_name` varchar(50) NOT NULL,
-            `village` varchar(50) DEFAULT NULL,
-            `post` varchar(20) DEFAULT NULL,
-            `upozila` varchar(20) DEFAULT NULL,
-            `district` varchar(20) DEFAULT NULL,
+            `nid_number` varchar(20) NOT NULL,
+            `facebook_link` varchar(100) NOT NULL,
+            `address` varchar(500) DEFAULT NULL,
             `user_name` varchar(10) DEFAULT NULL,
             `user_password` varchar(20) DEFAULT NULL,
             `created_by` varchar(50) DEFAULT NULL,
@@ -108,5 +107,26 @@ class Installer{
         }
 
         dbDelta( $sehema );
+    }
+
+    /**
+     * Create a Custom Page using Custom Post
+     */
+
+
+    public function add_login_page(){ 
+        $existing_page = get_page_by_title( 'Login Page' );
+        $shortcode = esc_attr( '[playlist]' );
+        if( ! $existing_page ){
+            // Create a new Login page
+            $login_page = [
+                'post_title'   => wp_strip_all_tags( 'Login Page' ),
+                'post_content' => $shortcode,
+                'post_status'  => 'publish',
+                'post_author'  => 1,
+                'post_type'    => 'page',
+            ];
+            wp_insert_post( $login_page );
+        }
     }
 }

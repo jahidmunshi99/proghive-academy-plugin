@@ -1,166 +1,232 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Video Playlist</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <!-- Title -->
+    <title>Login Form</title>
+    <!-- CSS Custom -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Bootstrap CDN-->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous"> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script> -->
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-      /* background-color: #333; */
+        /* ===== GOOGLE FONT ===== */
+    @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
+    /* ===== Base ===== */
+    *,::after, ::before{
+        box-sizing: border-box;    
+    }
+    :root{
+        --body-color:#000;
+        --light-white-color:#fff;
+        --input-color:#C5C3BF;
+        --border-color:#DCDDE1;
+        --btn-bg-hover-color:#E61F23;
+        /* Typography */
+        --body-font:'Josefin Sans', sans-serif;
+        --normal-font-size:1.2rem;
+        --small-font-size:1rem;
+    }
 
+    body{
+        background: var(--body-color);
+        font: var(--body-font)
     }
-    #main{
-        margin-top: 20px;
+    .login-main .container, 
+    .container-fluid, 
+    .container-lg, 
+    .container-md, 
+    .container-sm, 
+    .container-xl, 
+    .container-xxl {
+      --bs-gutter-x: 1.5rem;
+      --bs-gutter-y: 0;
+      width: 100%;
+      padding-right: calc(var(--bs-gutter-x) * .5);
+      padding-left: calc(var(--bs-gutter-x) * .5);
+      margin-right: auto;
+      margin-left: auto;
     }
-    .container {
+    .row {
+      --bs-gutter-x: 1.5rem;
+      --bs-gutter-y: 0;
       display: flex;
-      width: 1280px;
-      /* height: 100vh; */
-      margin: 0 auto;
-      padding-top: 50px;
-      /* background-color: #333; */
+      flex-wrap: wrap;
+      margin-top: calc(-1 * var(--bs-gutter-y));
+      margin-right: calc(-.5 * var(--bs-gutter-x));
+      margin-left: calc(-.5 * var(--bs-gutter-x));
     }
-    /* Playlist Section */
-    .playlist {
-      width: 30%;
-      background-color: #333;
-      color: #fff;
-      overflow-y: auto;
-      padding: 20px;
+
+    .col-12 {
+      flex: 0 0 auto;
+      width: 100%;
     }
-    .playlist .playlist-content h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 24px;
+
+
+    /* ===== FORM MAIN ===== */
+    .login-main{
+        background: url('/assets/img/bg.jpg') no-repeat center /cover;
+        width: 100%;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;  
     }
-    .playlist .playlist-content sup{
-        background: #ff0404;
-        color: #ffffff;
-        font-size: 50%;
-        border-radius: 5%;
-        padding: 0.1rem 0.2rem;
-        margin-left: 5px;
+
+    .login-form{
+        max-width: 420px;
+        background: var(--light-white-color);
+        padding: 70px 35px;
+        position: relative;
+        margin: 0 auto;
+        border-radius: 5px;
+        box-shadow: 0 4px 10px var(--input-color);
     }
-    .video-item {
+
+    .login-form::after{
+        content: "";
+        width: 195px;
+        height: 50px;
+        background: url('/assets/img/after.png') no-repeat center /cover;
+        top:0;
+        right:0;
+        position: absolute;
+    }
+
+    .login-form::before{
+        content: "";
+        width: 195px;
+        height: 50px;
+        background: url('/assets/img/before.png') no-repeat center /cover;
+        bottom:0;
+        left:0;
+        position: absolute;
+    }
+
+    .login-form .logo-image img{
+        width: 100px;
+    }
+
+    .login-form .form-title{
+        margin: 1rem 0 2rem 0;
+    }
+
+    .login-form .form-group{
+        margin-bottom: 20px;
+        height: 55px;
+        position: relative;
+    }
+    .login-form .form-group input{
+      width: 100%;
       padding: 10px;
-      cursor: pointer;
-      transition: background 0.3s;
-      border-bottom: 0.5px solid #555;
     }
-    .video-item:hover {
-      background-color: #444;
-    }
-    .video-item.active {
-      background-color: #555;
-    }
-    /* Player Section */
-    .player {
-      width: 70%;
-      background-color: #222;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding-top: 60px;
-    }
-    iframe{
-        width: 90%;
-        height: 460px;
-    }
-    video {
-      width: 90%;
-      height: auto;
-      /* max-height: 90%; */
-      border: 2px solid #333;
-    }
-    .video-details{
-        width: 90%;
-        margin-top: 30px;
-        color: #fff;
-        /* overflow-y: auto; */
-     }
-
-     @media screen and (max-width: 768px) {
-        .container{
-            flex-direction: column-reverse;
-        }
-        .player{
-            width: 100%;
 
 
-        }
-        .playlist{
-            width: 100%;
-            text-align: center;
-        }
-        .video-details{
-            overflow-y: auto;
-            height: 120px;
+    .form-group .form-control{   
+        height: 100%;
+        background: none;
+        outline: 0;
+        border: 1px solid var(--border-color);
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
 
-        }
-     }
+    .form-group .form-control:focus{
+        box-shadow: none;
+        border: 1px solid var(--body-color);
+    }
 
+    .form-label{
+        position: absolute;
+        left: 1rem;
+        top: 1rem;
+        padding: 0 0.5rem;
+        color: var(--input-color);
+        transition: 0.3s;
+    }
+
+    .form-control:focus + .form-label,
+    .form-control:not(:placeholder-shown).form-control:not(:focus)+ .form-label{
+        left: 1rem;
+        top: -0.9rem;
+        font-size: var(--small-font-size);
+        color: var(--body-color);
+        z-index: 10;
+        background: var(--light-white-color);
+        
+    }
+
+
+    .btn-theme{
+        height: 2.5rem;
+        background: var(--body-color);
+        color: var(--light-white-color);
+        outline: 0;
+        border: 0;
+        padding: 0.5rem 0;
+        border-radius: 0.3rem;
+        line-height: 0;
+        transition: 0.3s;
+    }
+
+    .btn-theme:hover{
+        background: var(--btn-bg-hover-color);
+    }
   </style>
+
 </head>
 <body>
-<div id="video-playlist">
-    <div class="container">
-        <!-- Playlist Section -->
-        <div class="playlist">
-            <div class="playlist-content">
-                <h2>Video Playlist<sup>4th Batch</sup></h2>
-            </div>
-            <div class="video-items">
-                <div class="video-item" onclick="playVideo('https://www.youtube.com/embed/2cCznPJQzGY?si=aFiwCdx4QPaYLkyU')">Video 1</div>
-                <div class="video-item" onclick="playVideo('video2.mp4')">Video 2</div>
-                <div class="video-item" onclick="playVideo('video3.mp4')">Video 3</div>
-                <div class="video-item" onclick="playVideo('video3.mp4')">Video 3</div>
-                <div class="video-item" onclick="playVideo('video3.mp4')">Video 3</div>
-                <div class="video-item" onclick="playVideo('video3.mp4')">Video 3</div>
-                <div class="video-item" onclick="playVideo('video3.mp4')">Video 3</div>
-                <div class="video-item" onclick="playVideo('video3.mp4')">Video 3</div>
-                <div class="video-item" onclick="playVideo('video3.mp4')">Video 3</div>
-                <div class="video-item" onclick="playVideo('video3.mp4')">Video 3</div>
-                <div class="video-item" onclick="playVideo('video3.mp4')">Video 3</div>
-                <div class="video-item" onclick="playVideo('video3.mp4')">Video 3</div>
-                <div class="video-item" onclick="playVideo('video3.mp4')">Video 3</div>
-                <div class="video-item" onclick="playVideo('video3.mp4')">Video 3</div>
-                <div class="video-item" onclick="playVideo('video3.mp4')">Video 3</div>
-            </div>            
-        </div> <!-- End Playlist-->
-
-        <!-- Player Section -->
-        <div class="player">
-            <!-- <video id="videoPlayer" controls autoplay> -->
-            <!-- <source src="https://www.youtube.com/embed/2cCznPJQzGY?si=aFiwCdx4QPaYLkyU" type="video/mp4"> -->
-            <iframe id="videoPlayer" src="https://www.youtube.com/embed/2cCznPJQzGY?si=0jDzFhPFrVbsXxvg" title="YouTube video player" frameborder="0" allow=" autoplay;"  allowfullscreen></iframe>
-            <!-- </video> -->
-            <div class="video-details">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore repudiandae obcaecati nam, temporibus dolor ipsum voluptas iusto adipisci, eveniet architecto dolore iste quaerat tenetur molestias ipsam pariatur molestiae dolorem quia.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis reiciendis, earum molestiae ex atque quas sunt ipsam quibusdam odio aut, cupiditate quasi? Amet, possimus. Repellat molestias quam reprehenderit officiis delectus, ratione quos quis, minima enim iusto sunt, tempore quibusdam incidunt dolore harum! Repudiandae eius expedita odio totam quos corrupti. Tempore facilis, ipsam eum nisi fugiat assumenda rem iure voluptates dolor non odio, unde eveniet magnam dignissimos exercitationem rerum eos vel, necessitatibus aspernatur aut nemo quam quidem culpa in. Quae dolore vero nostrum ad error culpa hic dignissimos, animi voluptates delectus minus aut alias esse saepe, dolores odio veniam tempore. Odit delectus obcaecati earum amet doloribus, distinctio autem cumque voluptas. Vero, unde accusantium. Quod nam dolor nesciunt nemo, repellendus quis reiciendis blanditiis aliquam quibusdam ipsum voluptatibus necessitatibus officia accusamus. Mollitia, ea? Pariatur accusantium molestiae impedit aut, animi doloremque tempora adipisci praesentium totam incidunt eius atque voluptatem cumque temporibus magni ipsam! Unde saepe enim reiciendis dolorem deserunt hic nihil eius, in ullam id nesciunt quam porro itaque impedit? Eos voluptates id optio in repellendus sed, recusandae repellat quas ullam voluptatibus hic aut aliquam dolores a, maiores temporibus illum, enim ducimus qui quod? Vitae eaque perferendis neque quisquam ab commodi eveniet quos praesentium, maiores delectus quasi ullam dolor, est odit porro et nihil cumque in? Laboriosam consequuntur obcaecati nam beatae nisi. Beatae, adipisci omnis quis earum veritatis fuga voluptate et obcaecati dolorum modi vero saepe, accusamus consequatur nulla tempora qui dolorem error? Repellendus accusamus consequatur provident voluptas odio doloremque, aliquam minus incidunt sapiente, hic iusto veniam! Deserunt eum est delectus debitis fugiat labore expedita autem laudantium! Dolores non fuga, a minus amet voluptate quas ad fugit molestias minima unde illum obcaecati, repellendus neque? Officiis facere quia sapiente cupiditate repellat illum voluptatum ea est cum at id quo voluptate quod dignissimos hic, atque expedita consectetur officia dolor molestiae. Minus, quibusdam omnis in dolorum nobis dolorem sequi aliquam quis sunt unde dolore numquam veniam facilis quas, et voluptas iure odit sit. Iure perspiciatis repellendus modi qui odit possimus aperiam provident nobis tempora similique cumque harum voluptas sint fugit tempore iste aliquid nihil in labore, ratione deleniti corporis eligendi tenetur. Accusantium labore obcaecati sapiente voluptatem cupiditate hic iure corporis eum vitae numquam modi sit facilis voluptatibus ad earum voluptates in, porro dignissimos ipsam reiciendis. Laboriosam aperiam omnis veritatis suscipit minus voluptatem ea velit optio ipsum, commodi in sapiente nemo nesciunt dolores voluptates nam tempore alias, modi excepturi rerum ullam? Facere aliquid quasi sed, ad quos dolorem rerum minima ullam, debitis distinctio dolor fuga quis eum dignissimos eveniet error repellendus perferendis placeat voluptatum itaque vero doloribus sequi! Aut, eligendi laborum esse odio veritatis dolor magnam impedit, distinctio ducimus quasi temporibus dolorum dolore natus fuga, cumque quia ullam voluptates sequi nisi libero. Alias odit voluptates, quod provident fugit saepe perferendis ullam voluptatum aperiam voluptatem ex ratione, enim soluta, sed commodi veritatis incidunt? Mollitia repudiandae, odit cumque nobis veritatis dolores sit fuga a maxime est rerum illo, ad adipisci? Cumque nobis aperiam ex, recusandae provident inventore accusamus expedita doloremque?</p>
+    <!-- ***** Login Main Start ***** -->
+    <div class="login-main">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Login Form Start -->
+                    <div class="login-form">
+                        <!-- Logo Image Start -->
+                        <div class="logo-image">
+                            <a href="#">
+                                <img src="assets/img/logo.png" alt="image">
+                            </a>
+                        </div>
+                        <!-- Logo Image Start -->
+                        <!-- Form Title Start -->
+                        <div class="form-title">
+                            <h3>Sign Into Your account</h3>
+                        </div>
+                        <!-- Form Title End -->
+                        <!-- Form Input Start -->
+                        <div class="form">
+                            <form action="" method="post">
+                                <!-- Form Group-1 Start -->
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="email" autocomplete="off" aria-label="Email" placeholder="">
+                                    <label class="form-label">Email</label>
+                                </div>
+                                <!-- Form Group-1 End -->
+                                <!-- Form Group-2 Start -->
+                                <div class="form-group">
+                                    <input type="password" class="form-control" name="password" autocomplete="off" aria-label="Password" placeholder="">
+                                    <label class="form-label">Password</label>
+                                </div>
+                                <!-- Form Group-2 End -->
+                                <!-- Form Group-3 Start -->
+                                <div class="form-group mb-0">
+                                    <button class=" btn-theme col-12">Login</button>
+                                </div>
+                                <!-- Form Group-3 End -->
+                            </form>
+                        </div>
+                        <!-- Form Input End -->
+                    </div>
+                    <!-- Login Form Start -->
+                </div>
             </div>
         </div>
-        <!-- End Player Section -->
-    </div> <!-- End Container -->
-</div> <!-- End Video Playlist -->
-
-<script>
-  function playVideo(videoUrl) {
-    const videoPlayer = document.getElementById('videoPlayer');
-    const videoItems = document.querySelectorAll('.video-item');
-    
-    // Update the iframe src
-    videoPlayer.src = videoUrl;
-
-    // Remove 'active' class from all video items and add to the clicked one
-    videoItems.forEach(item => item.classList.remove('active'));
-    event.target.classList.add('active');
-  }
-</script>
-
+    </div>
+    <!-- ***** Login Main End ***** -->    
 </body>
 </html>

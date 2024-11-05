@@ -10,9 +10,10 @@
         </div>
     <?php
     }
-        $video_info = ph_videos_information_result();
-        $batch = ph_batch_name();
-        $count = ph_batch_count( );
+    /**
+     * Fetch Videos Data From MYSQL
+     */
+        $videos = get_videos_result();
     ?>
     <form action="" method="post">
         <table class="form-table">
@@ -42,8 +43,8 @@
          <!-- End Header -->
         <!-- Column Start -->
         <?php 
-             if( ! empty( $video_info )){                
-                foreach( $video_info as $data ){;
+             if( ! empty( $videos )){                
+                foreach( $videos as $data ){;
                 // echo $student_count = $data->id;
                 ?>
                 <tr>

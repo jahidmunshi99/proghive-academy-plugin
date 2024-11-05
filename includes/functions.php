@@ -7,20 +7,18 @@ function insert_students_information( $args = [] ){
     global $wpdb;
     $defaults = [
         'id'            => '',
+        'course_name'   => '',
+        'batch'         => '',
         'name'          => '',
         'phone'         => '',
         'email'         => '',
-        'batch'         => '',
-        'fathers_name'  => '',
-        'mothers_name'  => '',
-        'village'       => '',
-        'post'          => '',
-        'upozila'       => '',
-        'district'      => '',
-        'created_by'    => get_current_user(),
-        'created_at'    => get_the_time( 'mysql' ),
+        'nid_number'    => '',
+        'facebook_link' => '',
+        'address'       => '',
         'user_name'     => '',
         'user_password' => '',
+        'created_by'    => get_current_user(),
+        'created_at'    => get_the_time( 'mysql' ),
     ];
     $data = wp_parse_args( $args, $defaults );
     $format = [
@@ -37,9 +35,6 @@ function insert_students_information( $args = [] ){
         '%s',
         '%s',
         '%d',
-        '%s',
-        '%s',
-
     ];
     $insert_item = $wpdb->insert( 
                   $wpdb->prefix.'ph_students', 
@@ -160,7 +155,7 @@ function get_sutdents_results( $args = [] ){
     //                         ORDER BY{$args['orderby']} {$args['order']}
     //                         LIMIT %d, %d",
     //                         $args['offset'], $args['number']);
-    $sql = $wpdb->prepare("SELECT * FROM $table_name", array());
+    $sql = $wpdb->prepare("SELECT * FROM $table_name");
 
     $items = $wpdb->get_results( $sql );
 
