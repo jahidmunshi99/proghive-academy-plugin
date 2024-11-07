@@ -14,20 +14,9 @@
          * @var mixed
          */
         $video_items = get_videos_result();
-        $user_batch = 'PHAOB-1';
-        $batches = [];
+        $user_batch = isset($_SESSION['user_batch']) ? $_SESSION['user_batch'] : '';
 
-        // Checking if the batch name matches the specific batch
-        if( !empty( $video_items )){
-            foreach( $video_items as $item ){
-                $batch_name = $item->batch_name;
-                if( $user_batch === $batch_name ){
-                    $batches[] = $item;
-                }
-            }
-        }
-        ?>
-
+    ?>
         <div id="video-playlist">
             <div class="container">
                 <!-- Playlist Section -->
@@ -38,10 +27,10 @@
                     </div>
                     <div class="video-items">
                         <?php
-                        if( ! empty( $batches ) ){
-                            foreach( $batches as $batch ){
-                                $url = $batch->video_url;                         
-                                $title = $batch->video_title;                         
+                        if( ! empty( $user_batch ) ){
+                            foreach( $video_items as $item ){
+                                $url = $item->video_url;                         
+                                $title = $item->video_title;                         
                                 ?>
                                 <div class="video-item" onclick="playVideo('<?php echo $url ?>')"><?php echo $title ?></div>
                             <?php } //foreach close
