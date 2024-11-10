@@ -15,7 +15,15 @@
          */
         $video_items = get_videos_result();
         $user_batch = isset($_SESSION['user_batch']) ? $_SESSION['user_batch'] : '';
+        $all_batch = [];
 
+        // Filter the videos by the user's batch name
+        foreach( $video_items as $item ) {
+            // Ensure `batch_name` exists and matches the user's batch
+            if ( !empty( $item->batch_name ) && $item->batch_name === $user_batch ) {
+                $all_batch[] = $item;
+            }
+        }      
     ?>
         <div id="video-playlist">
             <div class="container">
@@ -27,24 +35,27 @@
                     </div>
                     <div class="video-items">
                         <?php
-                        if( ! empty( $user_batch ) ){
-                            foreach( $video_items as $item ){
-                                $url = $item->video_url;                         
-                                $title = $item->video_title;                         
-                                ?>
+                        if( ! empty( $all_batch ) ){
+                            // Output the filtered results
+                            foreach ( $all_batch as $video) {
+                                // Assuming you want to display a specific property of each video, e.g., `title`
+                                $title = $video->video_title;
+                                $url = $video->video_url;
+                            ?>
                                 <div class="video-item" onclick="playVideo('<?php echo $url ?>')"><?php echo $title ?></div>
-                            <?php } //foreach close
-                            }else{?>
-                                <div class="video-item" onclick="playVideo('<?php echo esc_html__('No Video Published!', 'proghive' ) ?>')"><?php echo esc_html__('No Video Published!', 'proghive') ?></div>
                             <?php
-                            } //else close
+                            }
+                        }else{?>
+                            <div class="video-item" onclick="playVideo('<?php echo esc_html__('No Video Published!', 'proghive' ) ?>')"><?php echo esc_html__('No Video Published!', 'proghive') ?></div>
+                        <?php
+                        } //else close
                         ?>
                     </div>            
                 </div> <!-- End Playlist-->
 
                 <!-- Player Section -->
                 <div class="player">
-                    <iframe id="videoPlayer" src="" title="<?php echo $title ?>" frameborder="0" allow=" autoplay;"  allowfullscreen></iframe>
+                    <iframe id="videoPlayer" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media" allowfullscreen></iframe>
                     <!-- </video> -->
                     <div class="video-details">
                     </div>

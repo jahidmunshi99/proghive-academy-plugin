@@ -32,10 +32,20 @@
                         <select name="course_name" id="course_name">
                             <option value=""> - Select One -</option>
                             <?php
-                                if( ! empty( $courses ) ){
-                                    foreach( $courses as $course ){?>
-                                        <option value="<?php echo $course ?>"><?php echo $course ?></option>
-                                <?php }
+                                // Array to track duplicates
+                                $duplicate = [];
+
+                                // Check if the course array is not empty
+                                if( !empty($courses)) {
+                                    for($i = 0; $i < count($courses); $i++) {
+                                        // Only add to the dropdown if the course name is not in the duplicate array
+                                        if(!in_array($courses[$i], $duplicate)) {
+                                            $duplicate[] = $courses[$i]; // Add the course to the duplicate array
+                                            ?>
+                                            <option value="<?php echo $courses[$i]; ?>"><?php echo $courses[$i]; ?></option>
+                                        <?php
+                                        }
+                                    }
                                 }
                             ?>
                         </select>

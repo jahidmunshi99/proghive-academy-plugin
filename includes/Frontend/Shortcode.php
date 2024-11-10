@@ -9,7 +9,6 @@ class Shortcode{
     public function __construct()
     {
         add_shortcode('playlist', [ $this, 'playlist_shortcode' ] );
-        add_shortcode('login-form', [ $this, 'login_shortcode' ] );
     }
 
     public function playlist_shortcode( ){

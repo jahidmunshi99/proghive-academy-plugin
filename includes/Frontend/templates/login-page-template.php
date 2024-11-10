@@ -32,7 +32,7 @@ get_header();
                     <div class="form">
                         <form action="" method="POST">
                             <!-- Form Group-1 Start -->
-                            <?php wp_nonce_field('submit_form_nonce', 'submit_form_nonce'); ?>
+                            <?php wp_nonce_field('submit_button', 'submit_button'); ?>
 
                             <div class="form-group">
                                 <input type="text" class="form-control" name="email" id="email" autocomplete="off" aria-label="Email" placeholder="">
@@ -47,7 +47,9 @@ get_header();
                             <!-- Form Group-2 End -->
                             <!-- Form Group-3 Start -->
                             <div class="form-group mb-0">
-                                <button class="btn-theme col-12" type="submit" name="submit_button">Submit</button>
+                                <input type="submit" class="btn-theme col-12" id="submit_button" value="Login">
+
+                                <!-- <button class="btn-theme col-12" type="submit" name="submit_button">Submit</button> -->
                             </div>
                             <!-- Form Group-3 End -->
                         </form>

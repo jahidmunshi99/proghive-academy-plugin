@@ -25,7 +25,7 @@ class Formhandler{
 
     function form_handler_for_login() {
     // Define a global variable for the error message
-        global $error_message, $student, $wpdb;
+        global $error_message;
         $error_message = '';
 
         // Check if the form is submitted
@@ -34,8 +34,10 @@ class Formhandler{
         }
 
         // Verify nonce for security
-        if (!isset($_POST['submit_form_nonce']) || !wp_verify_nonce($_POST['submit_form_nonce'], 'submit_form_nonce')) {
+        if (!isset($_POST['submit_button']) || !wp_verify_nonce($_POST['submit_button'], 'submit_button')) {
             wp_die( __('Are you cheating?', 'proghive'));
+        }else{
+            $error_message = "Invalid request.";
         }
 
         // Sanitize form input
@@ -50,23 +52,26 @@ class Formhandler{
 
 
         // Fetch student data from the custom database table
-        $table_name = $wpdb->prefix . 'ph_students';
-        $student = $wpdb->get_row($wpdb->prepare("SELECT * FROM $table_name WHERE email = %s", $user_email));
 
+        $students = get_sutdents_results();
 
-         /**
-         * Checking sql data to user input data
-         */
-        if ( $student && $student->user_password === $user_password) {
-            // Redirect if the credentials are valid
-            $_SESSION['user_id'] = $student->id;
-            $_SESSION['user_email'] = $student->email;
-            $_SESSION ['user_batch']= $student->batch;
-            wp_redirect( home_url('/shortcode/' ));
-            exit;
-        } else {
-            // Set the error message if login fails
-            $error_message = "Invalid email or password!";
+  
+        foreach( $students as $item ){
+            $id = $item->id;
+            $email = $item->email;
+            $password = $item->user_password;
+            $batch = $item->batch;
+            if( $email === $user_email && $password === $user_password){
+                // Redirect if the credentials are valid
+                $_SESSION['user_id'] = $id;
+                $_SESSION['user_email'] = $email;
+                $_SESSION ['user_batch']= $batch;
+                wp_redirect( home_url('/shortcode/' ));
+                exit;
+            } else {
+                // Set the error message if login fails
+                $error_message = "Invalid email or password!";
+            }
         }
     }
 }

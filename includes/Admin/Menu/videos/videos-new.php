@@ -13,8 +13,8 @@
     $courses = [];
     $batches = [];
     foreach( $videos as $video ){
-        $courses[] = $video->batch_name;
-        $batches[] = $video->course_name;
+        $courses[] = $video->course_name;
+        $batches[] = $video->batch_name;
     }
         // $batch = ph_batch_name();
         // $count = ph_batch_count();
