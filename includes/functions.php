@@ -155,11 +155,21 @@ function get_sutdents_results( $args = [] ){
     //                         ORDER BY{$args['orderby']} {$args['order']}
     //                         LIMIT %d, %d",
     //                         $args['offset'], $args['number']);
-    $sql = $wpdb->prepare("SELECT * FROM $table_name");
+    $sql = $wpdb->prepare("SELECT * FROM $table_name
+                        ORDER BY %s %s
+                        LIMIT %d, %d",
+                        $args['orderby'], $args['order'], $args['offset'], $args['number']);
 
     $items = $wpdb->get_results( $sql );
 
     return $items;
+}
+
+function get_students_count(){
+    global $wpdb;
+    $table = $wpdb->prefix.'ph_students';
+    $sql = $wpdb->get_var("SELECT count(id) FROM $table");
+    return $sql;
 }
 
 

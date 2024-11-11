@@ -30,19 +30,19 @@
                 <!-- Playlist Section -->
                 <div class="playlist">
                     <div class="playlist-content">
-                        <h3 class="playlist-title">Video Playlist</h3>
-                        <p class="batch-number"><?php echo $user_batch ?></p>
+                        <div class="playlist-title">Video Playlist</div>
+                        <p class="batch-number"><?php echo esc_attr__('4th Batch', 'proghive') ?></p>
                     </div>
                     <div class="video-items">
                         <?php
-                        if( ! empty( $all_batch ) ){
+                        if( ! empty( $video_items ) ){
                             // Output the filtered results
-                            foreach ( $all_batch as $video) {
+                            foreach ( $video_items as $video) {
                                 // Assuming you want to display a specific property of each video, e.g., `title`
                                 $title = $video->video_title;
                                 $url = $video->video_url;
                             ?>
-                                <div class="video-item" onclick="playVideo('<?php echo $url ?>')"><?php echo $title ?></div>
+                                <div class="video-item" onclick="playVideo('<?php echo $url ?>', event)"><?php echo $title ?></div>
                             <?php
                             }
                         }else{?>
@@ -55,7 +55,7 @@
 
                 <!-- Player Section -->
                 <div class="player">
-                    <iframe id="videoPlayer" src="" frameborder="0" allow="accelerometer; autoplay; encrypted-media" allowfullscreen></iframe>
+                    <iframe id="videoPlayer" src="" title="<?php echo $title ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope" allowfullscreen></iframe>
                     <!-- </video> -->
                     <div class="video-details">
                     </div>
@@ -63,4 +63,5 @@
                 <!-- End Player Section -->
             </div> <!-- End Container -->
         </div> <!-- End Video Playlist -->
+
     <?php
