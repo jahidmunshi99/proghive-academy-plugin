@@ -18,7 +18,7 @@ function insert_students_information( $args = [] ){
         'user_name'     => '',
         'user_password' => '',
         'created_by'    => get_current_user(),
-        'created_at'    => get_the_time( 'mysql' ),
+        'created_at'    => current_datetime('mysql'),
     ];
     $data = wp_parse_args( $args, $defaults );
     $format = [
@@ -167,9 +167,9 @@ function get_sutdents_results( $args = [] ){
 
 function get_students_count(){
     global $wpdb;
-    $table = $wpdb->prefix.'ph_students';
-    $sql = $wpdb->get_var("SELECT count(id) FROM $table");
-    return $sql;
+    $table_name = $wpdb->prefix.'ph_students';
+    $sql = $wpdb->get_var("SELECT count(id) FROM $table_name");
+    return (int)$sql;
 }
 
 
