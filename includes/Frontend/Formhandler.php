@@ -24,20 +24,19 @@ class Formhandler{
      */
 
     function form_handler_for_login() {
-    // Define a global variable for the error message
+        // Define a global variable for the error message
         global $error_message;
         $error_message = '';
 
-        // Check if the form is submitted
-        if ( ! isset($_POST['submit_button'])) {
+        
+        // Check if the form is submitted by checking the submit button
+        if (!isset($_POST['submit_button'])) {
             return;
         }
 
-        // Verify nonce for security
-        if (!isset($_POST['submit_button']) || !wp_verify_nonce($_POST['submit_button'], 'submit_button')) {
-            wp_die( __('Are you cheating?', 'proghive'));
-        }else{
-            $error_message = "Invalid request.";
+        // Verify nonce for security, checking first if the field exists
+        if (!isset($_POST['ph_nonce_field']) || !wp_verify_nonce($_POST['ph_nonce_field'], 'ph_nonce_action')) {
+            wp_die(__('Something is wrong with the request.', 'proghive'));
         }
 
         // Sanitize form input

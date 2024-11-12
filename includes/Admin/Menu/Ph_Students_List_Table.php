@@ -1,15 +1,14 @@
 <?php
-
 namespace Proghive\Academy\Admin\Menu;
-if( ! class_exists( 'Ph_List' )){
-    require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
+if( ! class_exists( 'Ph_Students_List_Table' )){
+    include_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 }
 
 /**
- * Formhandler Class
+ * Ph_Students_List_Table Class
  */
-class Ph_List extends \WP_List_Table{
-    function __construct()
+class Ph_Students_List_Table extends \WP_List_Table{
+    public function __construct()
     {
         parent::__construct([
             'singular' => 'content',
@@ -20,30 +19,32 @@ class Ph_List extends \WP_List_Table{
 
     public function get_columns(){
         return[
-            'cb'          => '<input type="checkbox" class=""/>',
-            'name'        => "<strong>".__( 'Name', 'proghive' )."</strong>",
-            'email'       => "<strong>".__( 'Email', 'proghive' )."</strong>",
-            'phone'       => "<strong>".__( 'Phone', 'proghive' )."</strong>",
-            'batch'       => "<strong>".__( 'Batch', 'proghive' )."</strong>",
-            'course_name' => "<strong>".__( 'Course Name', 'proghive' )."</strong>",
-            'created_by'  => "<strong>".__( 'Author', 'proghive' )."</strong>",
-            'created_at'  => "<strong>".__( 'Date', 'proghive' )."</strong>",
+            'cb'          => '<input type="checkbox"/>',
+            'name'        => __('Name', 'proghive'),
+            'email'       => __('Email', 'proghive'),
+            'phone'       => __('Phone', 'proghive'),
+            'course_name' => __('Course Name', 'proghive'),
+            'batch'       => __('Batch', 'proghive'),
+            'created_by'  => __('Author', 'proghive'),
+            'created_at'  => __('Date', 'proghive'),
         ];
     }
 
-    protected function column_default( $item, $column_name ){
-
+    protected function column_default( $item, $column_name ) {
         switch ($column_name) {
             case 'value':
                 # code...
                 break;
             
             default:
-                return isset( $item->$column_name ) ? $item->$column_name : '';
+                return isset($item->$column_name) ? $item->$column_name : '';
         }
     }
 
-    /**
+
+
+
+   /**
      * Prepares the list of items for displaying.
      */
     public function prepare_items() {
@@ -68,7 +69,7 @@ class Ph_List extends \WP_List_Table{
             $args['order'] = $_REQUEST['order'];
         }
 
-        $this->items = get_sutdents_results( $args );
+        $this->items = get_sutdents_results($args);
 
         $this->set_pagination_args(
             array(

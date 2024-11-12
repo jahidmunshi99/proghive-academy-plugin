@@ -9,19 +9,11 @@
             <p><?php _e( 'New Sutdents Added Sucessfully', 'proghive') ?></p>
         </div>
     <?php } ?>
-    <form action="" method="post">
+    <form action="" method="POST">
     <?php
-        $table = new Proghive\Academy\Admin\Menu\Ph_List();
+        $table = new Proghive\Academy\Admin\Menu\Ph_Students_List_Table();
         $table->prepare_items();
         $table->display();
     ?>
     </form>
-
-
-
-
-
-
-
-
 </div>
