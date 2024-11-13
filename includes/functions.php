@@ -156,9 +156,9 @@ function get_sutdents_results( $args = [] ){
     //                         LIMIT %d, %d",
     //                         $args['offset'], $args['number']);
     $sql = $wpdb->prepare("SELECT * FROM $table_name
-                        ORDER BY %s %s
+                        ORDER BY {$args['orderby']} {$args['order']}
                         LIMIT %d, %d",
-                        $args['orderby'], $args['order'], $args['offset'], $args['number']);
+                        $args['offset'], $args['number']);
 
     $items = $wpdb->get_results( $sql );
 

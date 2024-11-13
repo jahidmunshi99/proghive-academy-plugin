@@ -1,46 +1,68 @@
 <?php
 namespace Proghive\Academy\Admin\Menu;
+
 if( ! class_exists( 'Ph_Students_List_Table' )){
-    include_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
+    require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 }
 
 /**
- * Ph_Students_List_Table Class
+ * Ph Students List Table Class
  */
 class Ph_Students_List_Table extends \WP_List_Table{
     public function __construct()
     {
         parent::__construct([
             'singular' => 'content',
-            'plural'   => 'contents',
+            'plurual'  => 'contents',
             'ajax'     => false,
         ]);
     }
 
     public function get_columns(){
         return[
-            'cb'          => '<input type="checkbox"/>',
-            'name'        => __('Name', 'proghive'),
-            'email'       => __('Email', 'proghive'),
-            'phone'       => __('Phone', 'proghive'),
-            'course_name' => __('Course Name', 'proghive'),
-            'batch'       => __('Batch', 'proghive'),
-            'created_by'  => __('Author', 'proghive'),
-            'created_at'  => __('Date', 'proghive'),
+            'cb' => '<input type="checkbox"/>',
+            'name' => __( 'Name', 'proghive' ),
+            'email' => __( 'Email', 'proghive' ),
+            'phone' => __( 'Phone', 'proghive' ),
         ];
     }
 
-    protected function column_default( $item, $column_name ) {
+    protected function get_sortable_columns() {
+        $sortable = [
+            'name' => ['name', true ],
+            'phone' => ['phone', true ],
+
+        ];
+        return $sortable;
+    }
+    
+
+    public function column_default( $item, $column_name ){
         switch ($column_name) {
             case 'value':
                 # code...
                 break;
             
             default:
-                return isset($item->$column_name) ? $item->$column_name : '';
+                # code...
+                return isset( $item->$column_name) ? $item->$column_name : '';
         }
     }
 
+    protected function column_name( $item ){
+        $actions = [];
+        $actions['edit'] = sprintf( '<a href="%s" title="%s">%s</a>', admin_url( 'admin.php?page=proghive-plugin-students&action=edit&id=' . $item->id ), $item->id, __( 'Edit', 'proghive' ), __( 'Edit', 'proghive' ) );
+        $actions['delete'] = sprintf( '<a href="%s" class="submitdelete" onclick="return confirm(\'Are you sure?\');" title="%s">%s</a>', wp_nonce_url( admin_url( 'admin-post.php?action=ph-ac-delete-address&id=' . $item->id ), 'ph-ac-delete-address' ), $item->id, __( 'Delete', 'proghive' ), __( 'Delete', 'proghive' ) );
+        return sprintf(
+            '<a href="%1$s"><strong>%2$s</strong></a> %3$s', admin_url( 'admin.php?page=proghive-plugin-students&action=view&id=' . $item->id ), $item->name, $this->row_actions( $actions )
+        );
+    }
+
+    public function column_cb( $item ){
+        return sprintf(
+            '<input type="checkbox" name="student_id[]" value="%d"/>', $item->id
+        );
+    }
 
 
 
@@ -60,7 +82,7 @@ class Ph_Students_List_Table extends \WP_List_Table{
         $this->_column_headers = array($columns, $hidden, $sortable);
 
         $args = array(
-                'numberposts' => $per_page,
+                'number' => $per_page,
                 'offset'      => $offset,
         );
         
@@ -79,4 +101,5 @@ class Ph_Students_List_Table extends \WP_List_Table{
         );
         
     }
+
 }

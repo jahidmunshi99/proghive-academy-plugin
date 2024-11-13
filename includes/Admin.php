@@ -7,12 +7,8 @@ namespace Proghive\Academy;
 
 class Admin{
     public function __construct(){
-        $students = new Admin\Menu\Students();
-        $videos   = new Admin\Menu\Videos();
-        $settings = new Admin\Menu\Settings();
-        $batches  = new Admin\Menu\Batches();
-        new Admin\Menu( $students, $videos, $settings, $batches );
         $form_handle = new Admin\Menu\Formhandler( );
+        new Admin\Menu( $form_handle );
         $this->dispath_action( $form_handle );
     }
 

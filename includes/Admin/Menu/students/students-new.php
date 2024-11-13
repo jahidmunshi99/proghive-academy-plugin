@@ -49,6 +49,9 @@
                                 }
                             ?>
                         </select>
+                        <?php if( $this->has_error('course_name')) { ?>
+                            <p class="description error"><i><?php echo $this->get_error('course_name') ?></i></p>
+                        <?php } ?>
                     </td>
                 </tr>
                 <!-- End Select Students Batch -->
@@ -72,12 +75,16 @@
                 </tr>
                 <!-- End Select Students Batch -->
                 <!-- Write Applicant Name -->
-                <tr>
+                <tr class="row<?php echo $this->has_error( 'name' ) ? ' form-invalid' : '' ;?>">
                     <th scope="row">
                         <label for="name"><?php _e( 'Applicant Name', 'wepme' ); ?></label>
                     </th>
                     <td>
-                        <input type="text" name="name" id="name" class="regular-text" value="">
+                    <input type="text" name="name" id="name" class="regular-text" value="">
+
+                        <?php if( $this->has_error('name')) { ?>
+                            <p class="description error"><i><?php echo $this->get_error( 'name' ) ?></i></p>
+                        <?php } ?>
                     </td>
                 </tr>
                 <!-- End Write Applicant Name -->

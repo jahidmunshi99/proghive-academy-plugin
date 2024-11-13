@@ -6,7 +6,7 @@ namespace Proghive\Academy\Frontend;
  */
 class Formhandler{
 
-       public function __construct()
+    public function __construct()
     {
         add_action( 'init', [$this, 'session_start'] );
         add_action('template_redirect', [$this, 'form_handler_for_login']);

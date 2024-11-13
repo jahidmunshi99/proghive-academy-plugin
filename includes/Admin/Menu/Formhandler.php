@@ -2,10 +2,93 @@
 
 namespace Proghive\Academy\Admin\Menu;
 
+use Proghive\Academy\Traits\Form_Error;
+
 /**
  * Formhandler Class
  */
 class Formhandler{
+    use Form_Error;
+    
+    /**
+     * Students Page Function
+     */
+    public function students_page_function(){
+        $action = isset( $_GET['action']) ? $_GET['action'] : 'default';
+
+        switch ( $action ) {
+            case 'new':
+                $template = __DIR__ . '/students/students-new.php';
+                break;
+            case 'edit':
+                $template = __DIR__ . '/students/students-edit.php';
+                break;
+
+            default:
+            $template = __DIR__ . '/students/students-dashboard.php';
+        }
+
+        if( file_exists( $template )){
+            include $template;
+        }
+    }
+
+    /**
+     * Videos Page Function
+     */
+    
+    public function vidoes_pages_function(){
+        $action = isset($_GET['action']) ? $_GET['action'] : 'default';
+
+        switch ( $action ) {
+            case 'new':
+                $template = __DIR__ . '/videos/videos-new.php';
+                break;
+            case 'edit':
+                $template = __DIR__ . '/videos/videos-edit.php';
+                break;
+            case 'view':
+                $template = __DIR__ . '/videos/videos-view.php';
+                break;
+            default:
+                $template = __DIR__ . '/videos/videos-dashboard.php';
+        }
+
+        if( file_exists( $template )){
+            include( $template );
+        }
+    }
+
+
+    /**
+     * Batches Page Function
+     */
+
+    public function batches_page_function(){
+        $action = isset( $_GET['action']) ? $_GET['action'] : 'default';
+
+        switch ($action) {
+            case 'new':
+                $template = __DIR__ . '/batch/batch-new.php';
+                break;
+            case 'edit':
+                $template = __DIR__ . '/batch/batch-edit.php';
+                break;
+
+            default:
+            $template = __DIR__ . '/batch/batch-dashboard.php';
+        }
+
+        if( file_exists( $template )){
+            include $template;
+        }
+    }
+
+
+    /**
+     * Form Handler for New Students From
+     */
+
     public function form_handler_students(){
         /**
          * Check Button name
@@ -42,6 +125,54 @@ class Formhandler{
         $user_name     = ! empty($_POST[ 'user_name' ] ) ?  esc_attr($_POST[ 'user_name' ] ) : '';
         $user_password = ! empty($_POST[ 'user_password' ] ) ?  esc_attr( $_POST[ 'user_password' ] ) : '';
 
+        /**
+         * check if has empty field
+         */
+
+        if( empty( $course_name )){
+            $this->errors['course_name'] = __('please select course name', 'proghive');
+        }
+
+        if( empty( $batch )){
+            $this->errors['batch'] = __('please select the batch name', 'proghive');
+        }
+
+        if( empty( $name )){
+            $this->errors['name'] = __('please provide your name', 'proghive');
+        }
+
+        if( empty( $phone )){
+            $this->errors['phone'] = __('please provide your phone number', 'proghive');
+        }
+
+        if( empty( $email )){
+            $this->errors['email'] = __('please provide your email address', 'proghive');
+        }
+
+        if( empty( $nid_number )){
+            $this->errors['nid_number'] = __('please provide your national identity number', 'proghive');
+        }
+
+        if( empty( $facebook_link )){
+            $this->errors['facebook_link'] = __('please provide your facebook url', 'proghive');
+        }
+        
+        if( empty( $address )){
+            $this->errors['address'] = __('please provide your address', 'proghive');
+        }
+        
+        if( empty( $user_name )){
+            $this->errors['nid_number'] = __('please set your user name', 'proghive');
+        }
+        
+        if( empty( $user_password )){
+            $this->errors['user_password'] = __('please set your user password', 'proghive');
+        }
+
+        if ( ! empty( $this->errors ) ) {
+            return;
+        }
+
         $studets_info = insert_students_information( [
             'course_name'   => $course_name,
             'user_name'     => $user_name,
@@ -64,6 +195,7 @@ class Formhandler{
 
         $redirect_to = admin_url( 'admin.php?page=proghive-plugin-students&inserted=true' );
         wp_redirect( $redirect_to );
+        exit;
     }
 
 
@@ -107,6 +239,7 @@ class Formhandler{
         }
         $redirect_to = admin_url( 'admin.php?page=proghive-plugin-videos&installed=true' );
         wp_redirect( $redirect_to );
+        exit;
     }
 
 
@@ -160,5 +293,6 @@ class Formhandler{
 
         $redirect_to = admin_url( 'admin.php?page=proghive-plugin-batches&inserted=true' );
         wp_redirect( $redirect_to );
+        exit;
     }
 }
