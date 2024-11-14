@@ -1,13 +1,10 @@
 <div class="wrap">
-    <h1 class="wp-heading-inline"><?php _e( 'New Student', 'wepme' ); ?></h1>
+    <h1 class="wp-heading-inline"><?php _e( 'Edit Student', 'wepme' ); ?></h1>
     <a href="<?php echo admin_url( 'admin.php?page=proghive-plugin-students' ); ?>" class="page-title-action"><?php _e( 'Back', 'wepme' ); ?></a>
+    <a href="<?php echo admin_url( 'admin.php?page=proghive-plugin-students&action=new' ); ?>" class="page-title-action"><?php _e( 'Add New Student', 'wepme' ); ?></a>
 
     <hr>
     <br>
-    <?php
-        $sutdetns_info = ph_sutdetns_information_result();
-        foreach( $sutdetns_info as $value );
-    ?>
 
     <form action="" method="post">
         <table class="form-table">
@@ -17,7 +14,7 @@
                         <label for="name"><?php _e( 'Name', 'wepme' ); ?></label>
                     </th>
                     <td>
-                        <input type="text" name="name" id="name" class="regular-text" value="<?php echo esc_html($value->name) ?>">
+                        <input type="text" name="name" id="name" class="regular-text" value="<?php echo esc_attr( $student->name ) ?>">
                     </td>
                 </tr>
                 <tr>
@@ -25,7 +22,7 @@
                         <label for="phone"><?php _e( 'Phone', 'wepme' ); ?></label>
                     </th>
                     <td>
-                        <input type="number" name="phone" id="phone" class="regular-text" value="">
+                        <input type="number" name="phone" id="phone" class="regular-text" value="<?php echo esc_attr( $student->phone ) ?>">
                     </td>
                 </tr>
                 <tr>
@@ -33,7 +30,7 @@
                         <label for="email"><?php _e( 'Email', 'wepme' ); ?></label>
                     </th>
                     <td>
-                        <input type="email" name="email" id="email" class="regular-text" value="">
+                        <input type="email" name="email" id="email" class="regular-text" value="<?php echo esc_attr( $student->email ) ?>">
                     </td>
                 </tr>
                 <tr>
@@ -41,78 +38,57 @@
                         <label for="batch"><?php _e( 'Batch', 'wepme' ); ?></label>
                     </th>
                     <td>
-                        <input type="text" name="batch" id="batch" class="regular-text" value="">
+                        <input type="text" name="batch" id="batch" class="regular-text" value="<?php echo esc_attr( $student->batch ) ?>">
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">
-                        <label for="fathers_name"><?php _e( 'Fathers Name', 'wepme' ); ?></label>
+                        <label for="nid_number"><?php _e( 'NID Number', 'wepme' ); ?></label>
                     </th>
                     <td>
-                        <input type="text" name="fathers_name" id="fathers_name" class="regular-text" value="">
+                        <input type="text" name="nid_number" id="nid_number" class="regular-text" value="<?php echo esc_attr( $student->nid_number ) ?>">
                     </td>
                 </tr>
+                <!-- Insert Your Facebook Profile Link -->
                 <tr>
                     <th scope="row">
-                        <label for="mothers_name"><?php _e( 'Mothers Name', 'wepme' ); ?></label>
+                        <label for="facebook_link"><?php _e( 'Facebook Link', 'wepme' ); ?></label>
                     </th>
                     <td>
-                        <input type="text" name="mothers_name" id="mothers_name" class="regular-text" value="">
+                        <input type="text" name="facebook_link" id="facebook_link" class="regular-text" value="<?php echo esc_attr( $student->facebook_link ) ?>">
                     </td>
                 </tr>
+                <!-- End Insert Your Facebook Profile Link -->
+                <!-- Write Applicant Address -->
                 <tr>
                     <th scope="row">
-                        <label for=""><?php _e( 'Address', 'wepme' ); ?></label>
-                    </th>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        <label for="village"><?php _e( 'Village', 'wepme' ); ?></label>
+                        <label for="address"><?php _e( 'Address', 'wepme' ); ?></label>                        
                     </th>
                     <td>
-                        <input type="text" name="village" id="village" class="regular-text" value="">
+                        <textarea name="address" id="address" cols="30" rows="6" class="regular-text" placeholder="Please write your village/city, Uplozila and District."><?php echo esc_attr( $student->address ) ?></textarea>
                     </td>
                 </tr>
-                <tr>
-                    <th scope="row">
-                        <label for="post"><?php _e( 'Post', 'wepme' ); ?></label>
-                    </th>
-                    <td>
-                        <input type="text" name="post" id="post" class="regular-text" value="">
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        <label for="upozila"><?php _e( 'Upozila', 'wepme' ); ?></label>
-                    </th>
-                    <td>
-                        <input type="text" name="upozila" id="upozila" class="regular-text" value="">
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        <label for="district"><?php _e( 'District', 'wepme' ); ?></label>
-                    </th>
-                    <td>
-                        <input type="text" name="district" id="district" class="regular-text" value="">
-                    </td>
-                </tr>
+                <!-- End Write Applicant Address -->
+                <!-- Set User name to login user Dashboard -->
                 <tr>
                     <th scope="row">
                         <label for="user_name"><?php _e( 'User Name', 'wepme' ); ?></label>
                     </th>
                     <td>
-                        <input type="text" name="user_name" id="user_name" class="regular-text" value="">
+                        <input type="text" name="user_name" id="user_name" class="regular-text" value="<?php echo esc_attr( $student->user_name ) ?>">
                     </td>
                 </tr>
+                <!-- End Set User name to login user Dashboard -->
+                <!-- Set User Password to login user Dashboard -->
                 <tr>
                     <th scope="row">
                         <label for="user_password"><?php _e( 'Password', 'wepme' ); ?></label>
                     </th>
                     <td>
-                        <input type="text" name="user_password" id="user_password" class="regular-text" value="">
+                        <input type="text" name="user_password" id="user_password" class="regular-text" value="<?php echo esc_attr( $student->user_password ) ?>">
                     </td>
                 </tr>
+                <!-- Set User Password to login user Dashboard -->
             </tbody>
         </table>
 

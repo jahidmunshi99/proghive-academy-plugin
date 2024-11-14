@@ -145,25 +145,28 @@ function get_sutdents_results( $args = [] ){
         'offset'  => 0,
         'orderby' => 'id',
         'order'   => 'ASC',
+        'id'      => 0
     ];
     $args = wp_parse_args( $args, $defaults );
 
     /**
      * Query to fatch Data
      */
-    // $sql = $wpdb->prepare( "SELECT * FROM $table_name
-    //                         ORDER BY{$args['orderby']} {$args['order']}
-    //                         LIMIT %d, %d",
-    //                         $args['offset'], $args['number']);
-    $sql = $wpdb->prepare("SELECT * FROM $table_name
-                        ORDER BY {$args['orderby']} {$args['order']}
-                        LIMIT %d, %d",
-                        $args['offset'], $args['number']);
+    if( $args['id'] > 0 ){
+        $sql = $wpdb->prepare("SELECT * FROM $table_name WHERE id = %d", $args['id']);
+        return $wpdb->get_row( $sql );
+    }else{
+        $sql = $wpdb->prepare("SELECT * FROM $table_name
+                            ORDER BY {$args['orderby']} {$args['order']}
+                            LIMIT %d, %d",
+                            $args['offset'], $args['number']);
 
-    $items = $wpdb->get_results( $sql );
+        $items = $wpdb->get_results( $sql );
 
-    return $items;
+        return $items;
+    }
 }
+
 
 function get_students_count(){
     global $wpdb;

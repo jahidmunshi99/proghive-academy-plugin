@@ -15,12 +15,15 @@ class Formhandler{
      */
     public function students_page_function(){
         $action = isset( $_GET['action']) ? $_GET['action'] : 'default';
+        $id = isset( $_GET['id']) ? intval($_GET['id']) : 0;
+
 
         switch ( $action ) {
             case 'new':
                 $template = __DIR__ . '/students/students-new.php';
                 break;
             case 'edit':
+                $student = get_sutdents_results( ['id' => $id] );
                 $template = __DIR__ . '/students/students-edit.php';
                 break;
 
