@@ -6,7 +6,6 @@
 function insert_students_information( $args = [] ){
     global $wpdb;
     $defaults = [
-        'id'            => '',
         'course_name'   => '',
         'batch'         => '',
         'name'          => '',
@@ -20,31 +19,69 @@ function insert_students_information( $args = [] ){
         'created_by'    => get_current_user(),
         'created_at'    => current_datetime('mysql'),
     ];
+
     $data = wp_parse_args( $args, $defaults );
-    $format = [
-        '%d',
-        '%s',
-        '%s',
-        '%s',
-        '%s',
-        '%s',
-        '%d',
-        '%s',
-        '%s',
-        '%s',
-        '%s',
-        '%s',
-        '%d',
-    ];
-    $insert_item = $wpdb->insert( 
-                  $wpdb->prefix.'ph_students', 
-                  $data, 
-                  $format,
-                );
-    if( ! $insert_item ){
-        return new \WP_Error('Faield to Insert', __('Faield To Insert Student Data', 'wepme'));
+
+    if( isset( $data['id'])){
+
+        $id = $data['id'];
+        unset( $data['id'] );
+
+        $format = [
+            '%s',
+            '%s',
+            '%s',
+            '%s',
+            '%s',
+            '%d',
+            '%s',
+            '%s',
+            '%s',
+            '%s',
+            '%s',
+            '%d',
+        ];
+        $where = [
+            'id' => $id
+        ];
+        $where_format =[
+            '%d',
+        ];
+
+        $updated = $wpdb->update(
+            $wpdb->prefix.'ph_students', 
+            $data,
+            $where, 
+            $format,
+            $where_format,
+        );
+        return $updated;
+    }else{
+
+        $format = [
+            '%s',
+            '%s',
+            '%s',
+            '%s',
+            '%s',
+            '%d',
+            '%s',
+            '%s',
+            '%s',
+            '%s',
+            '%s',
+            '%d',
+        ];
+        $insert_item = $wpdb->insert( 
+                    $wpdb->prefix.'ph_students', 
+                    $data, 
+                    $format,
+                    );
+        if( ! $insert_item ){
+            return new \WP_Error('Faield to Insert', __('Faield To Insert Student Data', 'wepme'));
+        }
+        return $wpdb->insert_id;
     }
-    return $wpdb->insert_id;
 }
 
 /**
@@ -173,6 +210,18 @@ function get_students_count(){
     $table_name = $wpdb->prefix.'ph_students';
     $sql = $wpdb->get_var("SELECT count(id) FROM $table_name");
     return (int)$sql;
+}
+
+/**
+ * Initialize Delete ifnormation form MySql
+ */
+function ph_delete( $id ){
+    global $wpdb;
+    $sql_table = $wpdb->prefix.'ph_students';
+    return $wpdb->delete( $sql_table,
+        ['id'=> $id],
+        ['%d'],
+    );
 }
 
 

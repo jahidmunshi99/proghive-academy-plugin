@@ -117,16 +117,17 @@ class Formhandler{
         /**
          * Sanitize Students Information
          */
-        $course_name   = ! empty( $_POST[ 'course_name' ] ) ? sanitize_text_field($_POST[ 'course_name' ] ) : '';
-        $batch         = ! empty( $_POST[ 'batch' ] ) ? sanitize_text_field($_POST[ 'batch' ] ) : '';
-        $name          = ! empty($_POST[ 'name' ] ) ?  sanitize_text_field($_POST[ 'name' ] ) : '';
-        $phone         = ! empty($_POST[ 'phone' ] ) ?  sanitize_text_field($_POST[ 'phone' ] ) : '';
-        $email         = ! empty( $_POST[ 'email' ] ) ? sanitize_text_field($_POST[ 'email' ] ) : '';
-        $nid_number    = ! empty( $_POST[ 'nid_number' ] ) ? sanitize_text_field($_POST[ 'nid_number' ] ) : '';
-        $facebook_link = ! empty( $_POST[ 'facebook_link' ] ) ? esc_attr( $_POST[ 'facebook_link' ] ) : '';
-        $address       = ! empty( $_POST[ 'address' ] ) ? sanitize_textarea_field( $_POST[ 'address' ] ) : '';
-        $user_name     = ! empty($_POST[ 'user_name' ] ) ?  esc_attr($_POST[ 'user_name' ] ) : '';
-        $user_password = ! empty($_POST[ 'user_password' ] ) ?  esc_attr( $_POST[ 'user_password' ] ) : '';
+        $id            = isset( $_POST[ 'id' ] ) ? $_POST[ 'id' ] : 0;
+        $course_name   = isset( $_POST[ 'course_name' ] ) ? sanitize_text_field( $_POST[ 'course_name' ] ) : '';
+        $batch         = isset( $_POST[ 'batch' ] ) ? sanitize_text_field( $_POST[ 'batch' ] ) : '';
+        $name          = isset( $_POST[ 'name' ] ) ?  sanitize_text_field( $_POST[ 'name' ] ) : '';
+        $phone         = isset( $_POST[ 'phone' ] ) ?  sanitize_text_field( $_POST[ 'phone' ] ) : '';
+        $email         = isset( $_POST[ 'email' ] ) ? sanitize_text_field( $_POST[ 'email' ] ) : '';
+        $nid_number    = isset( $_POST[ 'nid_number' ] ) ? sanitize_text_field( $_POST[ 'nid_number' ] ) : '';
+        $facebook_link = isset( $_POST[ 'facebook_link' ] ) ? esc_attr( $_POST[ 'facebook_link' ] ) : '';
+        $address       = isset( $_POST[ 'address' ] ) ? sanitize_textarea_field( $_POST[ 'address' ] ) : '';
+        $user_name     = isset( $_POST[ 'user_name' ] ) ?  esc_attr( $_POST[ 'user_name' ] ) : '';
+        $user_password = isset( $_POST[ 'user_password' ] ) ?  esc_attr( $_POST[ 'user_password' ] ) : '';
 
         /**
          * check if has empty field
@@ -176,7 +177,7 @@ class Formhandler{
             return;
         }
 
-        $studets_info = insert_students_information( [
+        $args = [
             'course_name'   => $course_name,
             'user_name'     => $user_name,
             'user_password' => $user_password,
@@ -189,14 +190,25 @@ class Formhandler{
             'address'       => $address,
             'user_name'     => $user_name,
             'user_password' => $user_password,
-        ] ) ;
+        ];
 
-            if( is_wp_error( $studets_info )){
-                wp_die( $studets_info->get_error_message() );
-            }
+        if( $id ){
+            $args['id'] = $id;
+        }
 
+        $studets_info = insert_students_information( $args ) ;
 
-        $redirect_to = admin_url( 'admin.php?page=proghive-plugin-students&inserted=true' );
+        if( is_wp_error( $studets_info )){
+            wp_die( $studets_info->get_error_message() );
+        }
+
+        if( $id ){
+            $redirect_to = admin_url( 'admin.php?page=proghive-plugin-students&action=edit&student-updated=true&id=' . $id );
+
+        }else{
+            $redirect_to = admin_url( 'admin.php?page=proghive-plugin-students&inserted=true' );
+        }
+
         wp_redirect( $redirect_to );
         exit;
     }
@@ -297,5 +309,34 @@ class Formhandler{
         $redirect_to = admin_url( 'admin.php?page=proghive-plugin-batches&inserted=true' );
         wp_redirect( $redirect_to );
         exit;
+    }
+
+    /**
+     * Delete Students
+     */
+    public function delete_students(){
+        if( ! wp_verify_nonce( $_REQUEST['_wpnonce'], 'ph-ac-delete-address' ) ){
+            wp_die( esc_html__( 'Are you cheatting', 'wepme' ) );
+        }
+
+        /**
+         * Verifiy Current user can
+         */
+        if( ! current_user_can( 'manage_options' )){
+            wp_die( esc_html__( 'Are you cheatting', 'wepme' ) );
+        }
+
+        $id = isset( $_REQUEST[ 'id' ] ) ? $_REQUEST[ 'id' ] : 0;
+
+        if( ph_delete( $id )){
+            $redirect_to = admin_url( 'admin.php?page=proghive-plugin-students&student-deleted=true&id=' . $id );
+
+        }else{
+            $redirect_to = admin_url( 'admin.php?page=proghive-plugin-students&student-deleted=false&id=' . $id );
+      
+        }
+        wp_redirect( $redirect_to );
+        exit;
+
     }
 }

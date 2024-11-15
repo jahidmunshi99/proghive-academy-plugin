@@ -16,6 +16,7 @@ class Admin{
         add_action( 'admin_init', [ $form_handle, 'form_handler_students' ] );
         add_action( 'admin_init', [ $form_handle, 'form_handler_batches' ] );
         add_action( 'admin_init', [ $form_handle, 'form_handler_videos' ] );
+        add_action( 'admin_post_ph-ac-delete-address', [ $form_handle, 'delete_students'] );
     }
 
 }

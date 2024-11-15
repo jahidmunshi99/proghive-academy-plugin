@@ -9,6 +9,16 @@
             <p><?php _e( 'New Sutdents Added Sucessfully', 'proghive') ?></p>
         </div>
     <?php } ?>
+
+    <?php
+        if( isset( $_GET['student-deleted'] ) && $_GET['student-deleted'] == true){ ?>
+        <div class="notice notice-success">
+            <p><?php _e( 'Student has been Sucessfully Deleted', 'proghive') ?></p>
+        </div>
+
+    <?php } ?>
+    
+    <!--- Get all information form database in Table -->
     <form action="" method="POST">
     <?php
         $table = new Proghive\Academy\Admin\Menu\Ph_Students_List_Table();

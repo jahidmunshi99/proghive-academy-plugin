@@ -6,6 +6,12 @@
     <hr>
     <br>
 
+    <?php if( isset( $_GET['student-updated']) ){ ?>
+        <div class="notice notice-success">
+            <p><?php _e( 'Students Updated Sucessfully', 'proghive' ) ?></p>
+        </div>
+    <?php } ?>
+
     <form action="" method="post">
         <table class="form-table">
             <tbody>
@@ -39,6 +45,14 @@
                     </th>
                     <td>
                         <input type="text" name="batch" id="batch" class="regular-text" value="<?php echo esc_attr( $student->batch ) ?>">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label for="course_name"><?php _e( 'Course Name', 'wepme' ); ?></label>
+                    </th>
+                    <td>
+                        <input type="text" name="course_name" id="course_name" class="regular-text" value="<?php echo esc_attr( $student->course_name ) ?>">
                     </td>
                 </tr>
                 <tr>
@@ -92,6 +106,7 @@
             </tbody>
         </table>
 
+        <input type="hidden" name="id" value="<?php echo esc_attr( $student->id ) ?>">
         <?php wp_nonce_field( 'new-student' ); ?>
         <?php submit_button( __( 'Update', 'wepme' ), 'primary', 'submit_student' ); ?>
     </form>

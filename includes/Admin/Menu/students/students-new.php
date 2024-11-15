@@ -128,7 +128,7 @@
                     </td>
                 </tr>
                 <!-- End Insert Your Facebook Profile Link -->
-                <!-- Write Applicant Email Address -->
+                <!-- Write Applicant Address -->
                 <tr>
                     <th scope="row">
                         <label for="address"><?php _e( 'Address', 'wepme' ); ?></label>                        
@@ -137,7 +137,7 @@
                         <textarea name="address" id="address" cols="30" rows="6" class="regular-text" placeholder="Please write your village/city, Uplozila and District."></textarea>
                     </td>
                 </tr>
-                <!-- End Write Applicant Email Address -->
+                <!-- End Write Applicant Address -->
                 <!-- Set User name to login user Dashboard -->
                 <tr>
                     <th scope="row">
